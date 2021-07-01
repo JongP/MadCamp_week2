@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.example.madcamp_week1.Fragment1;
 import com.example.madcamp_week1.Fragment2;
 import com.example.madcamp_week1.Fragment3;
+import com.example.madcamp_week1.FragmentImageSlider;
 import com.example.madcamp_week1.R;
 
 import java.util.ArrayList;
@@ -30,8 +31,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         super(fm);
         mContext = context;
         items = new ArrayList<Fragment>();
-        items.add(new Fragment1());
         items.add(new Fragment2());
+        items.add(new FragmentImageSlider());
         items.add(new Fragment3());
     }
 

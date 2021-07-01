@@ -1,5 +1,4 @@
 package com.example.madcamp_week1;
-import android.os.Bundle;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -12,9 +11,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
-import kotlin.LateinitKt;
+import com.example.madcamp_week1.MainActivity;
 
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHolder>{
@@ -22,7 +20,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     private ArrayList<ArrayList<String>> data = null;
     private Context context;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView info, name;
         ImageView img;
 
@@ -32,6 +30,13 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
             name = itemView.findViewById(R.id.name);
             img = itemView.findViewById(R.id.img);
             info = itemView.findViewById(R.id.info);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            MainActivity activity = (MainActivity)context;
+            activity.replaceFragment(FragmentImageSlider.newInstance());
         }
     }
 
@@ -58,6 +63,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         String text_info = data.get(position).get(2);
         holder.name.setText(text_name);
         holder.info.setText(text_info);
+
         Drawable drawable = context.getResources().getDrawable(R.drawable.rest_1);
         holder.img.setImageDrawable(drawable);
     }
