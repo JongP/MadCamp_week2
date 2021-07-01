@@ -54,21 +54,6 @@ public class Fragment2 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-        ArrayList<String> list = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            list.add(String.format("Test %d", i));
-        }
-
-        RecyclerView recyclerView = getView().findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        GalleryAdapter adapter = new GalleryAdapter(list);
-        recyclerView.setAdapter(adapter);
     }
 
     @Override
