@@ -3,10 +3,15 @@ package com.example.madcamp_week1;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,6 +58,17 @@ public class Fragment2 extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            list.add(String.format("Test %d", i));
+        }
+
+        RecyclerView recyclerView = getView().findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        GalleryAdapter adapter = new GalleryAdapter(list);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
