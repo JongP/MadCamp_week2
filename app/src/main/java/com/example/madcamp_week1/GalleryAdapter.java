@@ -1,38 +1,48 @@
 package com.example.madcamp_week1;
+import android.os.Bundle;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import kotlin.LateinitKt;
 
+
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHolder>{
 
-    private ArrayList<String> data = null;
+    private ArrayList<ArrayList<String>> data = null;
+    private Context context;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView text_content;
+        TextView info, name;
+        ImageView img;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            text_content = itemView.findViewById(R.id.img_content);
+            name = itemView.findViewById(R.id.name);
+            img = itemView.findViewById(R.id.img);
+            info = itemView.findViewById(R.id.info);
         }
     }
 
-    GalleryAdapter(ArrayList<String> list) {
+    public GalleryAdapter(Context context, ArrayList<ArrayList<String>> list) {
         data = list;
+        this.context = context;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public GalleryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -44,8 +54,12 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String text = data.get(position);
-        holder.text_content.setText(text);
+        String text_name = data.get(position).get(1);
+        String text_info = data.get(position).get(2);
+        holder.name.setText(text_name);
+        holder.info.setText(text_info);
+        Drawable drawable = context.getResources().getDrawable(R.drawable.rest_1);
+        holder.img.setImageDrawable(drawable);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.madcamp_week1;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,8 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Fragment2#newInstance} factory method to
@@ -24,6 +27,8 @@ public class Fragment2 extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    ArrayList<ArrayList<String>> list;
+    GalleryAdapter adapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -33,14 +38,6 @@ public class Fragment2 extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment2.
-     */
     // TODO: Rename and change types and number of parameters
     public static Fragment2 newInstance(String param1, String param2) {
         Fragment2 fragment = new Fragment2();
@@ -58,23 +55,31 @@ public class Fragment2 extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        ArrayList<String> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            list.add(String.format("Test %d", i));
+        String[] restArray = getResources().getStringArray(R.array.restaurants);
+        list = new ArrayList<>();
+        for (int i = 0; i < restArray.length; i++) {
+            int getRes2 = getResources().getIdentifier(restArray[i], "array", getContext().getPackageName());
+            String[] restInfo = getResources().getStringArray(getRes2);
+            ArrayList<String> list2 = new ArrayList<>();
+            for (int j = 0; j < restInfo.length; j++) {
+                list2.add(restInfo[j]);
+            }
+            list.add(list2);
         }
-
-        RecyclerView recyclerView = getView().findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        GalleryAdapter adapter = new GalleryAdapter(list);
-        recyclerView.setAdapter(adapter);
+        adapter = new GalleryAdapter(getActivity(), list);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_2, container, false);
+        View v = inflater.inflate(R.layout.fragment_2, container, false);
+
+        RecyclerView recyclerView = v.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        recyclerView.setAdapter(adapter);
+
+        return v;
     }
 }
