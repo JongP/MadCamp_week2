@@ -16,6 +16,7 @@
         android:gravity="center_vertical"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:text="한식"
         android:layout_weight="1"/>
     <ImageView
         android:id="@+id/btn_expand_toggle_id"
