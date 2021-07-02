@@ -7,19 +7,22 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class DictionaryAdapter extends RecyclerView.Adapter<DictionaryAdapter.DictionaryViewHolder>{
+public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private ArrayList<Dictionary> mList;
+    public static final int HEADER = 0;
+    public static final int CHILD = 1;
+    private ArrayList<Item> data;
 
     // constructor
-    public DictionaryAdapter(ArrayList<Dictionary> list){
-        this.mList = list;
+    public DictionaryAdapter(ArrayList<Item> list){
+        this.data = list;
     }
 
     public class DictionaryViewHolder extends RecyclerView.ViewHolder {
@@ -37,36 +40,102 @@ public class DictionaryAdapter extends RecyclerView.Adapter<DictionaryAdapter.Di
         }
     }
 
+    private static class ListHeaderViewHolder extends RecyclerView.ViewHolder {
+        public TextView category;
+        public ImageView btn_expand_toggle;
+        public Item refferalItem;
+
+        public ListHeaderViewHolder(View itemView) {
+            super(itemView);
+            category = (TextView) itemView.findViewById(R.id.category_id);
+            btn_expand_toggle = (ImageView) itemView.findViewById(R.id.btn_expand_toggle_id);
+        }
+    }
+
     @NonNull
     @NotNull
     @Override
-    public DictionaryViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
-        DictionaryViewHolder viewHolder = new DictionaryViewHolder(view);
+        View view;
 
-        return viewHolder;
+        switch (viewType) {
+            case HEADER:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_header, parent, false);
+                ListHeaderViewHolder header = new ListHeaderViewHolder(view);
+                return header;
+            case CHILD:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
+                DictionaryViewHolder child = new DictionaryViewHolder(view);
+                return child;
+        }
+        return null;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull DictionaryViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
 
-        holder.index.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-        holder.name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-        holder.contact.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+        final Item item = data.get(position);
+        switch (item.type) {
+            case HEADER:
+                final ListHeaderViewHolder itemController = (ListHeaderViewHolder) holder;
+                itemController.refferalItem = item;
+                itemController.category.setText(item.category);
+                if (item.invisibleChildren == null) {
+                    itemController.btn_expand_toggle.setImageResource(R.mipmap.circle_minus);
+                } else {
+                    itemController.btn_expand_toggle.setImageResource(R.mipmap.circle_plus);
+                }
+                itemController.btn_expand_toggle.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (item.invisibleChildren == null) {
+                            item.invisibleChildren = new ArrayList<Item>();
+                            int count = 0;
+                            int pos = data.indexOf(itemController.refferalItem);
+                            while (data.size() > pos + 1 && data.get(pos + 1).type == CHILD) {
+                                item.invisibleChildren.add(data.remove(pos + 1));
+                                count++;
+                            }
+                            notifyItemRangeRemoved(pos + 1, count);
+                            itemController.btn_expand_toggle.setImageResource(R.mipmap.circle_plus);
+                        } else {
+                            int pos = data.indexOf(itemController.refferalItem);
+                            int index = pos + 1;
+                            for (Item i : item.invisibleChildren) {
+                                data.add(index, i);
+                                index++;
+                            }
+                            notifyItemRangeInserted(pos + 1, index - pos - 1);
+                            itemController.btn_expand_toggle.setImageResource(R.mipmap.circle_minus);
+                            item.invisibleChildren = null;
+                        }
+                    }
+                });
+                break;
 
-        holder.index.setGravity(Gravity.CENTER);
-        holder.name.setGravity(Gravity.CENTER);
-        holder.contact.setGravity(Gravity.CENTER);
+            case CHILD:
+                DictionaryViewHolder childitemController = (DictionaryViewHolder) holder;
+                childitemController.index.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                childitemController.name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                childitemController.contact.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
 
-        holder.index.setText(mList.get(position).getIndex());
-        holder.name.setText(mList.get(position).getName());
-        holder.contact.setText(mList.get(position).getContact());
+                childitemController.index.setGravity(Gravity.CENTER);
+                childitemController.name.setGravity(Gravity.CENTER);
+                childitemController.contact.setGravity(Gravity.CENTER);
 
+                childitemController.index.setText(item.dict.getIndex());
+                childitemController.name.setText(item.dict.getName());
+                childitemController.contact.setText(item.dict.getContact());
+        }
     }
 
     @Override
     public int getItemCount() {
-        return (null != mList ? mList.size() : 0);
+        return (null != data ? data.size() : 0);
+    }
+
+    public int getItemViewType(int position) {
+        return data.get(position).type;
     }
 }

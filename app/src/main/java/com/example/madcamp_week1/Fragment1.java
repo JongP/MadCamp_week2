@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class Fragment1 extends Fragment {
 
-    private ArrayList<Dictionary> mArrayList;
+    private ArrayList<Item> mArrayList;
     private DictionaryAdapter mAdapter;
 
     TextView tv;
@@ -45,7 +45,7 @@ public class Fragment1 extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_1, container, false);
-        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.dictionary_view_id);
+        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_id);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
@@ -71,13 +71,31 @@ public class Fragment1 extends Fragment {
             JSONArray jsonArray = new JSONArray(jsonData);
 
             for(int i = 0; i < jsonArray.length(); i++){
+                switch (i){
+                    case 0:
+                        mArrayList.add(new Item("한식"));
+                        break;
+                    case 4:
+                        mArrayList.add(new Item("일식"));
+                        break;
+                    case 13:
+                        mArrayList.add(new Item("양식"));
+                        break;
+                    case 15:
+                        mArrayList.add(new Item("기타 외국 음식"));
+                        break;
+                    case 17:
+                        mArrayList.add(new Item("Pub & Bar"));
+                        break;
+                }
+
                 JSONObject jo = jsonArray.getJSONObject(i);
 
                 String name = jo.getString("name");
                 String contact = jo.getString("contact");
 
                 Dictionary data = new Dictionary(i+"", name, contact);
-                mArrayList.add(data);
+                mArrayList.add(new Item(data));
             }
 
         } catch (IOException e) {
