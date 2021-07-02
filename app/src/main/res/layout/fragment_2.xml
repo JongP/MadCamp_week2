@@ -12,17 +12,25 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="5dp">
+            android:layout_height="40dp">
 
-            <Button
+            <ImageButton
+                android:id="@+id/grid_button"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                />
+                android:src="@drawable/grid_3"
+                android:layout_toLeftOf="@id/list_button"
+                android:layout_marginRight="10dp"
+                style="?android:borderlessButtonStyle"/>
 
-            <Button
+            <ImageButton
+                android:id="@+id/list_button"
                 android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_height="30dp"
+                android:src="@drawable/grid_2"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                style="?android:borderlessButtonStyle"/>
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -30,7 +38,7 @@
             android:scrollbars="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/darker_gray"/>
+            android:background="@color/gray_50"/>
     </LinearLayout>
 
 
