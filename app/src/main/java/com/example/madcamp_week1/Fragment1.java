@@ -28,8 +28,6 @@ public class Fragment1 extends Fragment {
     private ArrayList<Item> mArrayList;
     private DictionaryAdapter mAdapter;
 
-    TextView tv;
-
     public Fragment1() {
         // Required empty public constructor
     }
@@ -98,6 +96,8 @@ public class Fragment1 extends Fragment {
                 mArrayList.add(new Item(data));
             }
 
+
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -106,6 +106,13 @@ public class Fragment1 extends Fragment {
 
         mAdapter = new DictionaryAdapter(mArrayList);
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new DictionaryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                // 전화 걸기
+            }
+        });
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(), mLinearLayoutManager.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
