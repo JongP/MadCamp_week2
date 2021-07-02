@@ -46,8 +46,8 @@ public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Drawable drawable = context.getResources().getDrawable(R.drawable.rest_2);
-        holder.mImageView.setImageDrawable(drawable);
-//        holder.bindSliderImage(sliderImage[position]);
+//        holder.mImageView.setImageDrawable(drawable);
+        holder.bindSliderImage(sliderImage[position]);
     }
 
     @Override
