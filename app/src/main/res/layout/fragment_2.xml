@@ -12,24 +12,23 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="50dp">
 
             <ImageButton
                 android:id="@+id/grid_button"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/grid_3"
-                android:layout_toLeftOf="@id/list_button"
-                android:layout_marginRight="10dp"
+                android:background="@drawable/grid_3"
+                android:layout_toStartOf="@id/list_button"
                 style="?android:borderlessButtonStyle"/>
 
             <ImageButton
                 android:id="@+id/list_button"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/grid_2"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
+                android:background="@drawable/grid_2"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
                 style="?android:borderlessButtonStyle"/>
         </RelativeLayout>
 
