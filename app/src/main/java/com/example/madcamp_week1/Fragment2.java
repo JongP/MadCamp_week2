@@ -58,7 +58,6 @@ public class Fragment2 extends Fragment {
             }
 
             String jsonData = buffer.toString();
-            System.out.println("xxxxtest "+jsonData);
 
             JSONArray jsonArray = new JSONArray(jsonData);
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -68,7 +67,6 @@ public class Fragment2 extends Fragment {
                 String contact = jo.getString("contact");
                 list2.add(name);
                 list2.add(contact);
-                System.out.println("xxxxtest "+list2);
                 list.add(list2);
             }
 
