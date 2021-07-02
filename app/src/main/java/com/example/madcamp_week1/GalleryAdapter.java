@@ -13,14 +13,17 @@ import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.example.madcamp_week1.MainActivity;
 
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHolder>{
     private ArrayList<ArrayList<String>> data = null;
-    private Context context;
+    private static Context context;
 
     private OnItemClickListener mListener;
+    private String[] sliderImage;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -33,11 +36,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView info, name;
         ImageView img;
-        private Context context;
 
         public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
-            this.context = context;
 
             name = itemView.findViewById(R.id.name);
             img = itemView.findViewById(R.id.img);
@@ -54,11 +55,16 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                 }
             });
         }
+
+        public void bindSliderImage(String imageURL) {
+            Glide.with(context).load(imageURL).into(img);
+        }
     }
 
-    public GalleryAdapter(Context context, ArrayList<ArrayList<String>> list) {
+    public GalleryAdapter(Context context, ArrayList<ArrayList<String>> list, String[] sliderImage) {
         data = list;
         this.context = context;
+        this.sliderImage = sliderImage;
     }
 
     @NonNull
@@ -80,7 +86,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
         /* glide 로 바꿔서 가게 사진도 인터넷에서 받기 */
         Drawable drawable = context.getResources().getDrawable(R.drawable.rest_1);
-        holder.img.setImageDrawable(drawable);
+//        holder.img.setImageDrawable(drawable);
+        holder.bindSliderImage(sliderImage[position]);
     }
 
     @Override

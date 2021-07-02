@@ -27,6 +27,29 @@ public class Fragment2 extends Fragment {
     GalleryAdapter adapter;
     MainActivity activity;
 
+    private String[] rest_images = new String[] {
+            "https://cdn.pixabay.com/photo/2019/12/26/10/44/horse-4720178_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/11/04/15/29/coffee-beans-5712780_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/09/02/18/03/girl-5539094_1280.jpg",
+            "https://cdn.pixabay.com/photo/2014/03/03/16/15/mosque-279015_1280.jpg",
+            "https://cdn.pixabay.com/photo/2019/12/26/10/44/horse-4720178_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/11/04/15/29/coffee-beans-5712780_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/09/02/18/03/girl-5539094_1280.jpg",
+            "https://cdn.pixabay.com/photo/2014/03/03/16/15/mosque-279015_1280.jpg",
+            "https://cdn.pixabay.com/photo/2019/12/26/10/44/horse-4720178_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/11/04/15/29/coffee-beans-5712780_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/09/02/18/03/girl-5539094_1280.jpg",
+            "https://cdn.pixabay.com/photo/2014/03/03/16/15/mosque-279015_1280.jpg",
+            "https://cdn.pixabay.com/photo/2019/12/26/10/44/horse-4720178_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/11/04/15/29/coffee-beans-5712780_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/09/02/18/03/girl-5539094_1280.jpg",
+            "https://cdn.pixabay.com/photo/2014/03/03/16/15/mosque-279015_1280.jpg",
+            "https://cdn.pixabay.com/photo/2019/12/26/10/44/horse-4720178_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/11/04/15/29/coffee-beans-5712780_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/09/02/18/03/girl-5539094_1280.jpg",
+            "https://cdn.pixabay.com/photo/2014/03/03/16/15/mosque-279015_1280.jpg"
+    };
+
     public Fragment2() {
         // Required empty public constructor
     }
@@ -75,7 +98,7 @@ public class Fragment2 extends Fragment {
         }
 
         activity = (MainActivity) getActivity();
-        adapter = new GalleryAdapter(activity, list);
+        adapter = new GalleryAdapter(activity, list, rest_images);
     }
 
     @Override
