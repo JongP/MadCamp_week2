@@ -1,6 +1,8 @@
 package com.example.madcamp_week1;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -105,14 +107,17 @@ public class Fragment1 extends Fragment {
         }
 
         mAdapter = new DictionaryAdapter(mArrayList);
-        mRecyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListener(new DictionaryAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                // 전화 걸기
+                String phoneNumber = mArrayList.get(position).dict.getContact();
+                phoneNumber = phoneNumber.replace("-", "");
+                startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber)));
             }
         });
+
+        mRecyclerView.setAdapter(mAdapter);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(), mLinearLayoutManager.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);

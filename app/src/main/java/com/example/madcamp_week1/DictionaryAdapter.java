@@ -22,6 +22,7 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public static final int HEADER = 0;
     public static final int CHILD = 1;
     private ArrayList<Item> data;
+    private OnItemClickListener mListner;
 
     // constructor
     public DictionaryAdapter(ArrayList<Item> list){
@@ -41,7 +42,7 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             this.name = (TextView) itemView.findViewById(R.id.name_id);
             this.contact = (TextView) itemView.findViewById(R.id.contact_id);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            this.contact.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null){
@@ -143,13 +144,6 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 childitemController.name.setText(item.dict.getName());
                 childitemController.contact.setText(item.dict.getContact());
 
-                childitemController.contact.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent mIntent = new Intent(Intent.ACTION_DIAL, Uri.parse(item.dict.getContact()));
-                        //startActivity(mIntent);
-                    }
-                });
         }
     }
 
@@ -161,8 +155,6 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public int getItemViewType(int position) {
         return data.get(position).type;
     }
-
-    private OnItemClickListener mListner;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
