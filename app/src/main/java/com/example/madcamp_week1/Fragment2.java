@@ -1,15 +1,19 @@
 package com.example.madcamp_week1;
 
 import android.content.res.AssetManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,6 +30,29 @@ public class Fragment2 extends Fragment {
     ArrayList<ArrayList<String>> list;
     GalleryAdapter adapter;
     MainActivity activity;
+
+    private String[] rest_images = new String[] {
+            "https://cdn.pixabay.com/photo/2019/12/26/10/44/horse-4720178_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/11/04/15/29/coffee-beans-5712780_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/09/02/18/03/girl-5539094_1280.jpg",
+            "https://cdn.pixabay.com/photo/2014/03/03/16/15/mosque-279015_1280.jpg",
+            "https://cdn.pixabay.com/photo/2019/12/26/10/44/horse-4720178_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/11/04/15/29/coffee-beans-5712780_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/09/02/18/03/girl-5539094_1280.jpg",
+            "https://cdn.pixabay.com/photo/2014/03/03/16/15/mosque-279015_1280.jpg",
+            "https://cdn.pixabay.com/photo/2019/12/26/10/44/horse-4720178_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/11/04/15/29/coffee-beans-5712780_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/09/02/18/03/girl-5539094_1280.jpg",
+            "https://cdn.pixabay.com/photo/2014/03/03/16/15/mosque-279015_1280.jpg",
+            "https://cdn.pixabay.com/photo/2019/12/26/10/44/horse-4720178_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/11/04/15/29/coffee-beans-5712780_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/09/02/18/03/girl-5539094_1280.jpg",
+            "https://cdn.pixabay.com/photo/2014/03/03/16/15/mosque-279015_1280.jpg",
+            "https://cdn.pixabay.com/photo/2019/12/26/10/44/horse-4720178_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/11/04/15/29/coffee-beans-5712780_1280.jpg",
+            "https://cdn.pixabay.com/photo/2020/09/02/18/03/girl-5539094_1280.jpg",
+            "https://cdn.pixabay.com/photo/2014/03/03/16/15/mosque-279015_1280.jpg"
+    };
 
     public Fragment2() {
         // Required empty public constructor
@@ -75,7 +102,7 @@ public class Fragment2 extends Fragment {
         }
 
         activity = (MainActivity) getActivity();
-        adapter = new GalleryAdapter(activity, list);
+        adapter = new GalleryAdapter(activity, list, rest_images);
     }
 
     @Override
@@ -86,6 +113,34 @@ public class Fragment2 extends Fragment {
 
         RecyclerView recyclerView = v.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+        adapter.setItemViewType(GalleryAdapter.LIST);
+
+        ImageButton grid_button = v.findViewById(R.id.grid_button);
+        ImageButton list_button = v.findViewById(R.id.list_button);
+
+        grid_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Drawable img_grid = getActivity().getResources().getDrawable(R.drawable.grid_on);
+//                Drawable img_list = getActivity().getResources().getDrawable(R.drawable.list_off);
+                grid_button.setImageResource(R.drawable.grid_on);
+                list_button.setImageResource(R.drawable.list_off);
+                recyclerView.setLayoutManager(new GridLayoutManager(activity, 3));
+                adapter.setItemViewType(GalleryAdapter.GRID);
+            }
+        });
+
+        list_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Drawable img_grid = getActivity().getResources().getDrawable(R.drawable.grid_off);
+//                Drawable img_list = getActivity().getResources().getDrawable(R.drawable.list_on);
+                grid_button.setImageResource(R.drawable.grid_off);
+                list_button.setImageResource(R.drawable.list_on);
+                recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+                adapter.setItemViewType(GalleryAdapter.LIST);
+            }
+        });
 
         recyclerView.setAdapter(adapter);
 
