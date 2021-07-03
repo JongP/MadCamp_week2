@@ -52,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void getHashKey() {
+    private void getHashKey(){
+
         PackageInfo packageInfo = null;
         try {
             packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
@@ -72,5 +73,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
 }
