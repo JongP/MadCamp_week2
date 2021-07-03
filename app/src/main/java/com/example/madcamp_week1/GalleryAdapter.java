@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 
-public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHolder>{
+public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private ArrayList<ArrayList<String>> data = null;
     private static Context context;
 
@@ -31,26 +31,52 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         void onItemClick(int position);
     }
 
-    public void setItemViewType(int viewType) {
-        mItemViewType = viewType;
-    }
-
-
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView info, name;
+
+    public void setItemViewType(int viewType) {
+        mItemViewType = viewType;
+    }
+
+    public static class GridViewHolder extends RecyclerView.ViewHolder {
         ImageView img;
         int type;
 
-        public ViewHolder(@NonNull View itemView, OnItemClickListener listener, int viewType) {
+        public GridViewHolder(@NonNull View itemView, OnItemClickListener listener, int viewType) {
             super(itemView);
 
-            if (viewType == LIST) {
-                name = itemView.findViewById(R.id.name);
-            }
+            img = itemView.findViewById(R.id.img);
+            type = viewType;
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
+        }
+
+        public void bindSliderImage(String imageURL) {
+            Glide.with(context).load(imageURL).into(img);
+        }
+    }
+
+    public static class ListViewHolder extends RecyclerView.ViewHolder {
+        TextView name;
+        ImageView img;
+        int type;
+
+        public ListViewHolder(@NonNull View itemView, OnItemClickListener listener, int viewType) {
+            super(itemView);
+
+            name = itemView.findViewById(R.id.name);
             img = itemView.findViewById(R.id.img);
             type = viewType;
 
@@ -80,37 +106,41 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
     @NonNull
     @Override
-    public GalleryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (viewType == GRID) {
             View view = inflater.inflate(R.layout.gallery_item_grid, parent, false);
-            GalleryAdapter.ViewHolder vh = new ViewHolder(view, mListener, viewType);
+            GridViewHolder vh = new GridViewHolder(view, mListener, viewType);
             return vh;
         } else {
             View view = inflater.inflate(R.layout.gallery_item_list, parent, false);
-            GalleryAdapter.ViewHolder vh = new ViewHolder(view, mListener, viewType);
+            ListViewHolder vh = new ListViewHolder(view, mListener, viewType);
             return vh;
         }
-
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if (holder.type == LIST) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (mItemViewType == GRID) {
+            GridViewHolder hld = (GridViewHolder) holder;
+            hld.bindSliderImage(sliderImage[position]);
+        } else {
+            ListViewHolder hld = (ListViewHolder) holder;
             String text_name = data.get(position).get(0);
-            holder.name.setText(text_name);
+            hld.name.setText(text_name);
+            hld.bindSliderImage(sliderImage[position]);
         }
-
-        /* glide 로 바꿔서 가게 사진도 인터넷에서 받기 */
-        Drawable drawable = context.getResources().getDrawable(R.drawable.rest_1);
-//        holder.img.setImageDrawable(drawable);
-        holder.bindSliderImage(sliderImage[position]);
     }
 
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return mItemViewType;
     }
 }

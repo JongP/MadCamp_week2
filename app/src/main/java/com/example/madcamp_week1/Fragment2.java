@@ -31,29 +31,6 @@ public class Fragment2 extends Fragment {
     GalleryAdapter adapter;
     MainActivity activity;
 
-    private String[] rest_images = new String[] {
-            "https://cdn.pixabay.com/photo/2019/12/26/10/44/horse-4720178_1280.jpg",
-            "https://cdn.pixabay.com/photo/2020/11/04/15/29/coffee-beans-5712780_1280.jpg",
-            "https://cdn.pixabay.com/photo/2020/09/02/18/03/girl-5539094_1280.jpg",
-            "https://cdn.pixabay.com/photo/2014/03/03/16/15/mosque-279015_1280.jpg",
-            "https://cdn.pixabay.com/photo/2019/12/26/10/44/horse-4720178_1280.jpg",
-            "https://cdn.pixabay.com/photo/2020/11/04/15/29/coffee-beans-5712780_1280.jpg",
-            "https://cdn.pixabay.com/photo/2020/09/02/18/03/girl-5539094_1280.jpg",
-            "https://cdn.pixabay.com/photo/2014/03/03/16/15/mosque-279015_1280.jpg",
-            "https://cdn.pixabay.com/photo/2019/12/26/10/44/horse-4720178_1280.jpg",
-            "https://cdn.pixabay.com/photo/2020/11/04/15/29/coffee-beans-5712780_1280.jpg",
-            "https://cdn.pixabay.com/photo/2020/09/02/18/03/girl-5539094_1280.jpg",
-            "https://cdn.pixabay.com/photo/2014/03/03/16/15/mosque-279015_1280.jpg",
-            "https://cdn.pixabay.com/photo/2019/12/26/10/44/horse-4720178_1280.jpg",
-            "https://cdn.pixabay.com/photo/2020/11/04/15/29/coffee-beans-5712780_1280.jpg",
-            "https://cdn.pixabay.com/photo/2020/09/02/18/03/girl-5539094_1280.jpg",
-            "https://cdn.pixabay.com/photo/2014/03/03/16/15/mosque-279015_1280.jpg",
-            "https://cdn.pixabay.com/photo/2019/12/26/10/44/horse-4720178_1280.jpg",
-            "https://cdn.pixabay.com/photo/2020/11/04/15/29/coffee-beans-5712780_1280.jpg",
-            "https://cdn.pixabay.com/photo/2020/09/02/18/03/girl-5539094_1280.jpg",
-            "https://cdn.pixabay.com/photo/2014/03/03/16/15/mosque-279015_1280.jpg"
-    };
-
     public Fragment2() {
         // Required empty public constructor
     }
@@ -102,7 +79,7 @@ public class Fragment2 extends Fragment {
         }
 
         activity = (MainActivity) getActivity();
-        adapter = new GalleryAdapter(activity, list, rest_images);
+        adapter = new GalleryAdapter(activity, list, Restaurants.rest_images);
     }
 
     @Override
@@ -121,24 +98,24 @@ public class Fragment2 extends Fragment {
         grid_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Drawable img_grid = getActivity().getResources().getDrawable(R.drawable.grid_on);
-//                Drawable img_list = getActivity().getResources().getDrawable(R.drawable.list_off);
-                grid_button.setImageResource(R.drawable.grid_on);
-                list_button.setImageResource(R.drawable.list_off);
-                recyclerView.setLayoutManager(new GridLayoutManager(activity, 3));
                 adapter.setItemViewType(GalleryAdapter.GRID);
+                Drawable img_grid = getActivity().getResources().getDrawable(R.drawable.grid_on);
+                Drawable img_list = getActivity().getResources().getDrawable(R.drawable.list_off);
+                grid_button.setBackground(img_grid);
+                list_button.setBackground(img_list);
+                recyclerView.setLayoutManager(new GridLayoutManager(activity, 3));
             }
         });
 
         list_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Drawable img_grid = getActivity().getResources().getDrawable(R.drawable.grid_off);
-//                Drawable img_list = getActivity().getResources().getDrawable(R.drawable.list_on);
-                grid_button.setImageResource(R.drawable.grid_off);
-                list_button.setImageResource(R.drawable.list_on);
-                recyclerView.setLayoutManager(new LinearLayoutManager(activity));
                 adapter.setItemViewType(GalleryAdapter.LIST);
+                Drawable img_grid = getActivity().getResources().getDrawable(R.drawable.grid_off);
+                Drawable img_list = getActivity().getResources().getDrawable(R.drawable.list_on);
+                grid_button.setBackground(img_grid);
+                list_button.setBackground(img_list);
+                recyclerView.setLayoutManager(new LinearLayoutManager(activity));
             }
         });
 
