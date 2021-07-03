@@ -2,6 +2,9 @@ package com.example.madcamp_week1;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
+import android.net.Uri;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,6 +22,7 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public static final int HEADER = 0;
     public static final int CHILD = 1;
     private ArrayList<Item> data;
+    private OnItemClickListener mListner;
 
     // constructor
     public DictionaryAdapter(ArrayList<Item> list){
@@ -31,12 +35,24 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         protected TextView name;
         protected TextView contact;
 
-        public DictionaryViewHolder(@NonNull @NotNull View itemView) {
+        public DictionaryViewHolder(@NonNull @NotNull View itemView, OnItemClickListener listener) {
             super(itemView);
 
             this.index = (TextView) itemView.findViewById(R.id.index_id);
             this.name = (TextView) itemView.findViewById(R.id.name_id);
             this.contact = (TextView) itemView.findViewById(R.id.contact_id);
+
+            this.contact.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -66,7 +82,7 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 return header;
             case CHILD:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
-                DictionaryViewHolder child = new DictionaryViewHolder(view);
+                DictionaryViewHolder child = new DictionaryViewHolder(view, mListner);
                 return child;
         }
         return null;
@@ -127,6 +143,7 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 childitemController.index.setText(item.dict.getIndex());
                 childitemController.name.setText(item.dict.getName());
                 childitemController.contact.setText(item.dict.getContact());
+
         }
     }
 
@@ -137,5 +154,13 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public int getItemViewType(int position) {
         return data.get(position).type;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListner = listener;
     }
 }

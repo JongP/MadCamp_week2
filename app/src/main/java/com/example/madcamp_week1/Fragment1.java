@@ -1,6 +1,8 @@
 package com.example.madcamp_week1;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -27,8 +29,6 @@ public class Fragment1 extends Fragment {
 
     private ArrayList<Item> mArrayList;
     private DictionaryAdapter mAdapter;
-
-    TextView tv;
 
     public Fragment1() {
         // Required empty public constructor
@@ -98,6 +98,8 @@ public class Fragment1 extends Fragment {
                 mArrayList.add(new Item(data));
             }
 
+
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -105,6 +107,16 @@ public class Fragment1 extends Fragment {
         }
 
         mAdapter = new DictionaryAdapter(mArrayList);
+
+        mAdapter.setOnItemClickListener(new DictionaryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                String phoneNumber = mArrayList.get(position).dict.getContact();
+                phoneNumber = phoneNumber.replace("-", "");
+                startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber)));
+            }
+        });
+
         mRecyclerView.setAdapter(mAdapter);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(), mLinearLayoutManager.getOrientation());
