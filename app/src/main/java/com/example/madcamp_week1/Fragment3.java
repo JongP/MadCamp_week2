@@ -3,10 +3,14 @@ package com.example.madcamp_week1;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import net.daum.mf.map.api.MapView;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,16 +53,21 @@ public class Fragment3 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    }
+
+    private void setContentView(int activity_main) {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_3, container, false);
+        MapView mapView = new MapView(getActivity());
+
+        ViewGroup mapViewContainer = (ViewGroup) view.findViewById(R.id.map_view_id);
+        mapViewContainer.addView(mapView);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_3, container, false);
+        return view;
     }
 }
