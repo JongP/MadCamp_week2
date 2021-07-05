@@ -1,5 +1,6 @@
 package com.example.madcamp_week1;
 
+import android.content.res.AssetManager;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,43 +15,20 @@ import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Fragment3#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
 public class Fragment3 extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public Fragment3() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment3.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Fragment3 newInstance(String param1, String param2) {
-        Fragment3 fragment = new Fragment3();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -58,7 +36,44 @@ public class Fragment3 extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    private void setContentView(int activity_main) {
+    private MapPOIItem createMarkers(String place, double latitude, double longitude){
+
+        MapPOIItem marker = new MapPOIItem();
+
+        marker.setItemName(place);
+        marker.setMapPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude));
+        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+        marker.setSelectedMarkerType(MapPOIItem.MarkerType.YellowPin); // 마커를 클릭했을때, 기본으로 제공하는 YellowPin 마커 모양.
+        marker.setShowDisclosureButtonOnCalloutBalloon(false);
+
+        return marker;
+    }
+
+    private Coord[] createCoords(){
+        Coord[] coords = new Coord[20];
+
+        coords[0] = new Coord(36.36267352354882,127.35791396778204);
+        coords[1] = new Coord(36.36351372100507, 127.35721028348622);
+        coords[2] = new Coord(36.36299396642154, 127.35623018342451);
+        coords[3] = new Coord(36.362026813544816, 127.35341241453233);
+        coords[4] = new Coord(36.36363775538186, 127.35867327094368);
+        coords[5] = new Coord(36.36313293783038, 127.35872666517896);
+        coords[6] = new Coord(36.36281587360104, 127.35777534296157);
+        coords[7] = new Coord(36.363362434975976, 127.35732379972953);
+        coords[8] = new Coord(36.363921648692795, 127.35791411233888);
+        coords[9] = new Coord(36.36307281302966, 127.35774030706231);
+        coords[10] = new Coord(36.36204705787819, 127.35418409141468);
+        coords[11] = new Coord(36.36233053115967, 127.35507674131362);
+        coords[12] = new Coord(36.36320980385998, 127.35713368467495);
+        coords[13] = new Coord(36.363252085749686, 127.35806146578395 );
+        coords[14] = new Coord(36.36257295195989, 127.35764331130726);
+        coords[15] = new Coord(36.36364603925113, 127.35891565295813);
+        coords[16] = new Coord(36.36336164618246, 127.35908983679943);
+        coords[17] = new Coord(36.36259191694817, 127.3573286336779);
+        coords[18] = new Coord(36.362151648881444, 127.35386144616314);
+        coords[19] = new Coord(36.36105869295062, 127.35395677507192);
+
+        return coords;
     }
 
     @Override
@@ -73,20 +88,71 @@ public class Fragment3 extends Fragment {
         mapView.zoomIn(true);
         mapView.zoomOut(true);
 
-        MapPOIItem marker = new MapPOIItem();
-        marker.setItemName("유성구청");
-        marker.setTag(0);
+        ArrayList<String> restList = new ArrayList<>();
 
-        marker.setMapPoint(MapPoint.mapPointWithGeoCoord(36.3622662202898, 127.3562463651629));
-        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-        marker.setSelectedMarkerType(MapPOIItem.MarkerType.YellowPin); // 마커를 클릭했을때, 기본으로 제공하는 YellowPin 마커 모양.
+        try {
+            AssetManager assetManager = getActivity().getAssets();
 
-        mapView.addPOIItem(marker);
+            InputStream is = assetManager.open("jsonDirectory/restaurantList.json");
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader reader = new BufferedReader(isr);
+
+            StringBuffer buffer = new StringBuffer();
+            String line = reader.readLine();
+            while (line!=null){
+                buffer.append(line+"\n");
+                line = reader.readLine();
+            }
+
+            String jsonData = buffer.toString();
+            JSONArray jsonArray = new JSONArray(jsonData);
+
+            for(int i = 0; i < jsonArray.length(); i++){
+
+                JSONObject jo = jsonArray.getJSONObject(i);
+                String name = jo.getString("name");
+                restList.add(name.replace("\n", ""));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Coord[] coords = createCoords();
+
+        for(int i = 0; i < restList.size(); i++){
+            mapView.addPOIItem(createMarkers(restList.get(i),coords[i].getLatitude(), coords[i].getLongitude()));
+        }
 
         mapViewContainer.addView(mapView);
 
         return view;
     }
 
+    class Coord{
+        double latitude;
+        double longitude;
 
+        public Coord(double latitude, double longitude) {
+            this.latitude = latitude;
+            this.longitude = longitude;
+        }
+
+        public double getLatitude() {
+            return latitude;
+        }
+
+        public void setLatitude(double latitude) {
+            this.latitude = latitude;
+        }
+
+        public double getLongitude() {
+            return longitude;
+        }
+
+        public void setLongitude(double longitude) {
+            this.longitude = longitude;
+        }
+    }
 }
