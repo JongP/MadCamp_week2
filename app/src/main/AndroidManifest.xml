@@ -32,7 +32,10 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="da5553505b272fdbc37149f3689c01fd"/>
 
-        <activity android:name=".ImageSliderActivity" />
+        <activity
+            android:name=".ImageSliderActivity"  >
+        </activity>
+
     </application>
 
 </manifest>
