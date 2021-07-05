@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     public void switchPage(int position) {
         Intent intent = new Intent(this, ImageSliderActivity.class);
         intent.putExtra("position", position);

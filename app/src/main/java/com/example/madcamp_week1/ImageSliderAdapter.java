@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.github.chrisbanes.photoview.PhotoView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +19,7 @@ public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView mImageView;
+        private PhotoView mImageView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -45,8 +46,6 @@ public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Drawable drawable = context.getResources().getDrawable(R.drawable.rest_2);
-//        holder.mImageView.setImageDrawable(drawable);
         holder.bindSliderImage(sliderImage[position]);
     }
 
