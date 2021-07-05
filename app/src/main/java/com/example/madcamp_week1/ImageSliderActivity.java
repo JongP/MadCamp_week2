@@ -19,15 +19,14 @@ public class ImageSliderActivity extends AppCompatActivity {
     private ViewPager2 sliderViewPager;
     private LinearLayout layoutIndicator;
 
-    private String[] images = new String[] {
-        "https://drive.google.com/file/d/1iuLn-QmW5EKq3TuUATmSfvz3ZelR43hi/view?usp=sharing",
-        "https://drive.google.com/file/d/1a9A3OSL1pw3IDp9p07bK4Hfr-8hI8UC4/view?usp=sharing"
-    };
-
     @Override
     public void onCreate (@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_slider);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         Intent intent = getIntent();
         int position = intent.getExtras().getInt("position");
@@ -36,7 +35,7 @@ public class ImageSliderActivity extends AppCompatActivity {
         layoutIndicator = findViewById(R.id.layoutIndicators);
 
         sliderViewPager.setOffscreenPageLimit(1);
-        sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
+        sliderViewPager.setAdapter(new ImageSliderAdapter(this, Restaurants.detail_images[position]));
 
         sliderViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -46,7 +45,7 @@ public class ImageSliderActivity extends AppCompatActivity {
             }
         });
 
-        setupIndicators(images.length);
+        setupIndicators(Restaurants.detail_images[position].length);
     }
 
     private void setupIndicators(int count) {

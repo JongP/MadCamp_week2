@@ -27,8 +27,10 @@ import com.example.madcamp_week1.ui.main.SectionsPagerAdapter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import net.daum.mf.map.api.MapView;
+
 public class MainActivity extends AppCompatActivity {
-    ViewPager viewPager;
+    CustomViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

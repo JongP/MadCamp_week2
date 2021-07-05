@@ -64,7 +64,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
 
         public void bindSliderImage(String imageURL) {
-            Glide.with(context).load(imageURL).into(img);
+            Glide.with(context).load(imageURL).placeholder(R.drawable.loading).into(img);
         }
     }
 
@@ -94,7 +94,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
 
         public void bindSliderImage(String imageURL) {
-            Glide.with(context).load(imageURL).into(img);
+            Glide.with(context).load(imageURL).placeholder(R.drawable.loading).into(img);
         }
     }
 
