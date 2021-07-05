@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.daum.mf.map.api.MapPOIItem;
+import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
 
@@ -65,9 +67,23 @@ public class Fragment3 extends Fragment {
         MapView mapView = new MapView(getActivity());
 
         ViewGroup mapViewContainer = (ViewGroup) view.findViewById(R.id.map_view_id);
+
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(36.3622662202898, 127.3562463651629), true);
+        mapView.zoomIn(true);
+        mapView.zoomOut(true);
+
+        MapPOIItem marker = new MapPOIItem();
+        marker.setItemName("유성구청");
+        marker.setTag(0);
+
+        marker.setMapPoint(MapPoint.mapPointWithGeoCoord(36.3622662202898, 127.3562463651629));
+        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+        marker.setSelectedMarkerType(MapPOIItem.MarkerType.YellowPin); // 마커를 클릭했을때, 기본으로 제공하는 YellowPin 마커 모양.
+
+        mapView.addPOIItem(marker);
+
         mapViewContainer.addView(mapView);
 
-        // Inflate the layout for this fragment
         return view;
     }
 }
