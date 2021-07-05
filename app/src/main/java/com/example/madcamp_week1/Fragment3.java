@@ -201,11 +201,15 @@ public class Fragment3 extends Fragment implements MapView.CurrentLocationEventL
         //Toast.makeText(LocationDemoAc)
     }
 
-    public void onRequestPermissionsResult(int permsRequestCode, @NonNull int[] permissions, @NonNull int[] grandResults){
+    // ActivityCompat를 사용한 퍼미션 요청의 결과를 리턴받는 메소드
+    @Override
+    public void onRequestPermissionsResult(int permsRequestCode, @NonNull String[] permissions, @NonNull int[] grandResults){
         if(permsRequestCode == PERMISSIONS_REQUEST_CODE && grandResults.length == REQUIRED_PERMISSIONS.length) {
 
+            // 요청 코드가 PREMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
             boolean check_result = true;
 
+            // 모든 퍼미션을 허용했는지 체크함
             for(int result : grandResults){
                 if (result != PackageManager.PERMISSION_GRANTED){
                     check_result = false;
@@ -214,10 +218,12 @@ public class Fragment3 extends Fragment implements MapView.CurrentLocationEventL
             }
 
             if (check_result) {
+                // 위치 값을 가져올 수 있음
                 Log.d("@@@", "start");
                 mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading);
             }
             else {
+                // 거부한 퍼미션이 있다면 앱을 사용할 수 없는 이유를 설명해주고 앱을 종료함. 2가지 경우가 있음.
                 if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), REQUIRED_PERMISSIONS[0])) {
                     Toast.makeText(getContext(), "퍼미션이 거부되었습니다. 앱을 다시 실행하여 퍼미션을 허용해주세요.", Toast.LENGTH_LONG).show();
                     getActivity().finish();
