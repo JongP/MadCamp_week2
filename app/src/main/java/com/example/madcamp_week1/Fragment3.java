@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
+import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.os.Bundle;
 
@@ -22,6 +23,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
@@ -47,6 +50,8 @@ public class Fragment3 extends Fragment implements MapView.CurrentLocationEventL
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION};
+    FloatingActionButton gps_button;
+    boolean gps_on = false;
 
 
     public Fragment3() {
@@ -105,6 +110,21 @@ public class Fragment3 extends Fragment implements MapView.CurrentLocationEventL
         mapView = new MapView(getActivity());
 
         ViewGroup mapViewContainer = (ViewGroup) view.findViewById(R.id.map_view_id);
+        gps_button = view.findViewById(R.id.gps_button);
+        gps_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gps_on = !gps_on;
+                if (gps_on) {
+                    Drawable img_on = getActivity().getResources().getDrawable(R.drawable.location_on);
+                    gps_button.setImageDrawable(img_on);
+                } else {
+                    Drawable img_off = getActivity().getResources().getDrawable(R.drawable.location_off);
+                    gps_button.setImageDrawable(img_off);
+                }
+                checkRunTimePermission();
+            }
+        });
 
         mapView.setCurrentLocationEventListener(this);
         mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(36.3622662202898, 127.3562463651629), true);
@@ -219,7 +239,7 @@ public class Fragment3 extends Fragment implements MapView.CurrentLocationEventL
 
             if (check_result) {
                 // 위치 값을 가져올 수 있음
-                Log.d("@@@", "start");
+                System.out.println("@@@" + "start");
                 mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading);
             }
             else {
@@ -244,7 +264,10 @@ public class Fragment3 extends Fragment implements MapView.CurrentLocationEventL
             // (안드로이드 6.0 이하 버전은 런타임 퍼미션이 필요없기 때문에 이미 허용된 걸로 인식함)
 
             // 3. 위치 값을 가져올 수 있음.
-            mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading);
+            if (gps_on)
+                mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading);
+            else
+                mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
         }
         else {
             // 2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요함. 2가지 경우 (3-1, 4-1) 가 있음.
@@ -268,7 +291,7 @@ public class Fragment3 extends Fragment implements MapView.CurrentLocationEventL
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("위치 서비스 비활성화");
-        builder.setMessage("앱을 사용하기 위해서는 위치 서비스가 필요합니다.\n" + "위치 설정을 수정하실래요?");
+        builder.setMessage("앱을 사용하기 위해서는 위치 서비스가 필요합니다.\n" + "위치 설정을 수정하시겠습니까?");
         builder.setCancelable(true);
         builder.setPositiveButton("설정", new DialogInterface.OnClickListener() {
             @Override
