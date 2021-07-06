@@ -31,7 +31,7 @@
 > Default 화면은 Header가 전부 펼쳐져 보인다.
 
 
-#### TAB2 - PHOTO
+#### TAB2 - PHOTOS
 
 <img src="source/tab2_1.gif" width="200">&nbsp;&nbsp;&nbsp;    <img src="source/tab2_2.gif" width="200">
 
