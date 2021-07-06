@@ -20,7 +20,7 @@
 > ExpandableRecyclerView 를 사용했다.
 > 카테고리를 Header로 설정했다. 
 > Default 화면은 Header가 전부 펼쳐져 보인다.
-
+<img src="source/tab1_1.gif" width="200">
 
 #### TAB2
 
