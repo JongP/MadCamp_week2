@@ -13,7 +13,9 @@
 ### 프로젝트 상세 설명
 
 #### Splash
+<img src="source/splashlogo.png" width="200">
 
+> SplashTheme 를 만든 후 MainActivity의 theme로 설정했다.
 
 
 #### TAB1 - RESTAURANT
