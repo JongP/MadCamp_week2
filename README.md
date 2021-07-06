@@ -10,7 +10,7 @@
 
 #### TAB1
 
-<img src="source/tab1_1.gif" width="200">     <img src="source/tab1_2.gif" width="200">
+<img src="source/tab1_1.gif" width="200">  \t   <img src="source/tab1_2.gif" width="200">
 
 + Design
 > 20개 식당의 이름, 연락처를 리스트 형식으로 보여준다. 
