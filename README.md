@@ -10,7 +10,7 @@
 
 ### 프로젝트 상세 설명
 
-#### TAB1
+#### TAB1 - RESTAURANT
 
 <img src="source/tab1_1.gif" width="200">&nbsp;&nbsp;&nbsp;    <img src="source/tab1_2.gif" width="200">
 
@@ -31,7 +31,7 @@
 > Default 화면은 Header가 전부 펼쳐져 보인다.
 
 
-#### TAB2
+#### TAB2 - PHOTO
 
 <img src="source/tab2_1.gif" width="200">&nbsp;&nbsp;&nbsp;    <img src="source/tab2_2.gif" width="200">
 
@@ -51,7 +51,7 @@
 >
 > viewPager2 에서 PhotoView 컴포넌트를 사용하여 사진의 줌 인 / 줌 아웃 기능 구현
 
-#### TAB3
+#### TAB3 - MAP
 
 <img src="source/tab3_1.gif" width="200">&nbsp;&nbsp;&nbsp;   <img src="source/tab3_2.gif" width="200">
 
