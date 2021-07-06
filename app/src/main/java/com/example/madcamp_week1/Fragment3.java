@@ -116,8 +116,19 @@ public class Fragment3 extends Fragment implements MapView.CurrentLocationEventL
             public void onClick(View view) {
                 gps_on = !gps_on;
                 if (gps_on) {
-                    Drawable img_on = getActivity().getResources().getDrawable(R.drawable.location_on);
-                    gps_button.setImageDrawable(img_on);
+                    if (!checkLocationServicesStatus()) {
+                        showDialogForLocationServiceSetting();
+                        if (checkLocationServicesStatus()) {
+                            Drawable img_on = getActivity().getResources().getDrawable(R.drawable.location_on);
+                            gps_button.setImageDrawable(img_on);
+                        }
+                        else {
+                            gps_on = false;
+                        }
+                    } else {
+                        Drawable img_on = getActivity().getResources().getDrawable(R.drawable.location_on);
+                        gps_button.setImageDrawable(img_on);
+                    }
                 } else {
                     Drawable img_off = getActivity().getResources().getDrawable(R.drawable.location_off);
                     gps_button.setImageDrawable(img_off);
@@ -130,12 +141,6 @@ public class Fragment3 extends Fragment implements MapView.CurrentLocationEventL
         mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(36.3622662202898, 127.3562463651629), true);
         mapView.zoomIn(true);
         mapView.zoomOut(true);
-
-        if (!checkLocationServicesStatus()){
-            showDialogForLocationServiceSetting();
-        } else {
-            checkRunTimePermission();
-        }
 
         ArrayList<String> restList = new ArrayList<>();
 
@@ -264,7 +269,7 @@ public class Fragment3 extends Fragment implements MapView.CurrentLocationEventL
             // (안드로이드 6.0 이하 버전은 런타임 퍼미션이 필요없기 때문에 이미 허용된 걸로 인식함)
 
             // 3. 위치 값을 가져올 수 있음.
-            if (gps_on)
+            if (gps_on && checkLocationServicesStatus())
                 mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading);
             else
                 mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
