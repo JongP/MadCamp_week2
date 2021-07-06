@@ -12,6 +12,10 @@
 
 ### 프로젝트 상세 설명
 
+#### Splash
+
+
+
 #### TAB1 - RESTAURANT
 
 <img src="source/tab1_1.gif" width="200">&nbsp;&nbsp;&nbsp;    <img src="source/tab1_2.gif" width="200">
