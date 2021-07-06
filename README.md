@@ -6,6 +6,8 @@
 ### 팀원 소개
 > 김현수, 최종윤  
 
+### 다운로드 링크
+> [Click Here](https://drive.google.com/file/d/1U405AnZg8mo9yUkzyT1M2L6q17bdciW0/view?usp=sharing)
 ---  
 
 ### 프로젝트 상세 설명
