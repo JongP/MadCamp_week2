@@ -15,7 +15,7 @@
 #### MainActivity
 <img src="source/splashlogo.png" width="200">
 
-> SplashTheme 를 만든 후 MainActivity의 theme로 설정했다.
+> SplashTheme 를 만든 후 MainActivity의 theme로 설정해 앱 실행 시 로고가 뜬다.
 >
 > TabLayout을 이용하고, ViewPager의 각 페이지와 연동했다.
 
