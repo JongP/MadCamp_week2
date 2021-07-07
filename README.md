@@ -57,9 +57,9 @@
 > 
 > RecyclerView와 Cardview를 사용했다.
 >
-> viewHolder를 클릭하면 새로운 ImageSliderctivity로 전환
+> viewHolder를 클릭하면 새로운 ImageSliderctivity로 전환된다.
 >
-> viewPager2 에서 PhotoView 컴포넌트를 사용하여 사진의 줌 인 / 줌 아웃 기능 구현
+> viewPager2 에서 PhotoView 컴포넌트를 사용하여 사진의 줌 인 / 줌 아웃 기능을 구현했다.
 
 #### TAB3 - MAP
 
