@@ -12,10 +12,12 @@
 
 ### 프로젝트 상세 설명
 
-#### Splash
+#### MainActivity
 <img src="source/splashlogo.png" width="200">
 
 > SplashTheme 를 만든 후 MainActivity의 theme로 설정했다.
+>
+> TabLayout을 이용하고, ViewPager의 각 페이지와 연동했다.
 
 
 #### TAB1 - RESTAURANT
