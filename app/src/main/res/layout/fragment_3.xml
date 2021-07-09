@@ -13,17 +13,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/gps_button"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/white"
-        android:src="@drawable/location_off"
-        app:fabSize="normal"
-        app:borderWidth="0dp"/>
+        />
 
 </RelativeLayout>
