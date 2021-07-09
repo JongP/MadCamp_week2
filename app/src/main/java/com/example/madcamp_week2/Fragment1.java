@@ -10,9 +10,14 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.example.madcamp_week2.server.RestResult;
+import com.example.madcamp_week2.server.RetrofitInterface;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,11 +28,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Fragment1 extends Fragment {
 
     private ArrayList<Item> mArrayList;
     private DictionaryAdapter mAdapter;
+    private Retrofit retrofit;
+    private RetrofitInterface retrofitInterface;
+    private String BASE_URL = "http://172.10.18.117:80";
 
     public Fragment1() {
         // Required empty public constructor
@@ -49,6 +64,19 @@ public class Fragment1 extends Fragment {
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         mArrayList = new ArrayList<>();
+
+        retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        retrofitInterface = retrofit.create(RetrofitInterface.class);
+        view.findViewById(R.id.btn_test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleTestServer();
+            }
+        });
+
+
 
         // parsing json
         AssetManager assetManager = getActivity().getAssets();
@@ -96,9 +124,6 @@ public class Fragment1 extends Fragment {
                 Dictionary data = new Dictionary(i+"", name, contact);
                 mArrayList.add(new Item(data));
             }
-
-
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -122,5 +147,27 @@ public class Fragment1 extends Fragment {
         mRecyclerView.addItemDecoration(dividerItemDecoration);
 
         return view;
+    }
+
+    private void handleTestServer() {
+        Call<List<RestResult>> call = retrofitInterface.executeGetAllRest();
+        call.enqueue(new Callback<List<RestResult>>() {
+            @Override
+            public void onResponse(Call<List<RestResult>> call, Response<List<RestResult>> response) {
+                if(response.code()==200){
+                    Log.d("evening", "onClick: test response success");
+                    List<RestResult> list = new ArrayList<>();
+                    list = response.body();
+                    Log.d("evening", list.get(0).getName());
+                }else if(response.code()==400){
+                    Log.d("evening", "onClick: test response fail");
+                }
+                Log.d("evening", "response end");
+            }
+            @Override
+            public void onFailure(Call<List<RestResult>> call, Throwable t) {
+                Log.d("serverError",t.getMessage());
+            }
+        });
     }
 }

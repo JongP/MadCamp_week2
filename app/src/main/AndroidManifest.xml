@@ -28,13 +28,7 @@
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="da5553505b272fdbc37149f3689c01fd"/>
 
-        <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="f269f03e461410fac7bef9468a15b925" />
 
         <activity
             android:name="com.example.madcamp_week2.ImageSliderActivity"  >
