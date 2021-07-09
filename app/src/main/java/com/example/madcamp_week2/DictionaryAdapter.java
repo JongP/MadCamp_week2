@@ -29,14 +29,14 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public class DictionaryViewHolder extends RecyclerView.ViewHolder {
 
-        protected TextView index;
+        //protected TextView index;
         protected TextView name;
         protected TextView contact;
 
         public DictionaryViewHolder(@NonNull @NotNull View itemView, OnItemClickListener listener) {
             super(itemView);
 
-            this.index = (TextView) itemView.findViewById(R.id.index_id);
+            //this.index = (TextView) itemView.findViewById(R.id.index_id);
             this.name = (TextView) itemView.findViewById(R.id.name_id);
             this.contact = (TextView) itemView.findViewById(R.id.contact_id);
 
@@ -130,15 +130,15 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             case CHILD:
                 DictionaryViewHolder childitemController = (DictionaryViewHolder) holder;
-                childitemController.index.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                //childitemController.index.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
                 childitemController.name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
                 childitemController.contact.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
 
-                childitemController.index.setGravity(Gravity.CENTER);
+                //childitemController.index.setGravity(Gravity.CENTER);
                 childitemController.name.setGravity(Gravity.CENTER);
                 childitemController.contact.setGravity(Gravity.CENTER);
 
-                childitemController.index.setText(item.dict.getIndex());
+                //childitemController.index.setText(item.dict.getIndex());
                 childitemController.name.setText(item.dict.getName());
                 childitemController.contact.setText(item.dict.getContact());
 
