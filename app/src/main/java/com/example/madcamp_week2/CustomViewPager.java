@@ -1,11 +1,10 @@
-package com.example.madcamp_week1;
+package com.example.madcamp_week2;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.viewpager.widget.ViewPager;
-import net.daum.mf.map.api.MapView;
 
 public class CustomViewPager extends ViewPager {
     public CustomViewPager(Context context) {

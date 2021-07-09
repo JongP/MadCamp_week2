@@ -1,4 +1,4 @@
-package com.example.madcamp_week1.ui.main;
+package com.example.madcamp_week2.ui.main;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;

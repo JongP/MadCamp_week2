@@ -1,4 +1,4 @@
-package com.example.madcamp_week1.ui.main;
+package com.example.madcamp_week2.ui.main;
 
 import android.content.Context;
 
@@ -8,10 +8,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.madcamp_week1.Fragment1;
-import com.example.madcamp_week1.Fragment2;
-import com.example.madcamp_week1.Fragment3;
-import com.example.madcamp_week1.R;
+import com.example.madcamp_week2.Fragment1;
+import com.example.madcamp_week2.Fragment2;
+import com.example.madcamp_week2.Fragment3;
+import com.example.madcamp_week2.R;
 
 import java.util.ArrayList;
 

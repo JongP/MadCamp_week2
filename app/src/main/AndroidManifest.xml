@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.madcamp_week1">
+    package="com.example.madcamp_week2">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -19,7 +19,7 @@
             android:resource="@xml/network_security_config" />
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.madcamp_week2.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -32,8 +32,12 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="da5553505b272fdbc37149f3689c01fd"/>
 
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="f269f03e461410fac7bef9468a15b925" />
+
         <activity
-            android:name=".ImageSliderActivity"  >
+            android:name="com.example.madcamp_week2.ImageSliderActivity"  >
         </activity>
 
     </application>

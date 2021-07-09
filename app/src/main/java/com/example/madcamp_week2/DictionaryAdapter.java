@@ -1,10 +1,8 @@
-package com.example.madcamp_week1;
+package com.example.madcamp_week2;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;

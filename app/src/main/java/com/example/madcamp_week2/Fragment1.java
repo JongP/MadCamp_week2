@@ -1,4 +1,4 @@
-package com.example.madcamp_week1;
+package com.example.madcamp_week2;
 
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;

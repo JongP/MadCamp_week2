@@ -1,4 +1,4 @@
-package com.example.madcamp_week1.ui.main;
+package com.example.madcamp_week2.ui.main;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.madcamp_week1.R;
+import com.example.madcamp_week2.R;
 
 /**
  * A placeholder fragment containing a simple view.
