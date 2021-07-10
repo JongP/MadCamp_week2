@@ -9,6 +9,20 @@ public class RestResult {
     private String category;
     private double rate;
     private int rateNum;
+    @SerializedName("_id")
+    private String id;
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getCategory() {
         return category;

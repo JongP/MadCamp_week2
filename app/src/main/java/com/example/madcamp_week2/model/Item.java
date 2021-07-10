@@ -5,25 +5,28 @@ import java.util.ArrayList;
 public class Item {
 
     // common
-    public int type;
-    public String category;
+    private int type;
+    private String category;
+    private String id;
+
 
     // if header
-    public ArrayList<Item> invisibleChildren;
+    private ArrayList<Item> invisibleChildren;
 
     // if child
-    public Dictionary dict;
-    public double rate;
-    public int rateNum;
+    private Dictionary dict;
+    private double rate;
+    private int rateNum;
 
     public Item(String category){
         this.category = category;
         this.type = 0;
     }
-    public Item(String category, Dictionary dict) {
+    public Item(String category, String id, Dictionary dict) {
         this.dict = new Dictionary(dict.getName(), dict.getContact());
         this.type = 1;
         this.category = category;
+        this.id = id;
     }
 
     @Override
@@ -47,6 +50,14 @@ public class Item {
                 return i.getCategory().equals(this.getCategory());
         }
         return false;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getType() {

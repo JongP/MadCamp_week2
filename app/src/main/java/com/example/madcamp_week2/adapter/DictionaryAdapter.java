@@ -94,12 +94,12 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
 
         final Item item = data.get(position);
-        switch (item.type) {
+        switch (item.getType()) {
             case HEADER:
                 final ListHeaderViewHolder itemController = (ListHeaderViewHolder) holder;
                 itemController.refferalItem = item;
-                itemController.category.setText(item.category);
-                if (item.invisibleChildren == null) {
+                itemController.category.setText(item.getCategory());
+                if (item.getInvisibleChildren() == null) {
                     itemController.btn_expand_toggle.setImageResource(R.mipmap.circle_minus);
                 } else {
                     itemController.btn_expand_toggle.setImageResource(R.mipmap.circle_plus);
@@ -107,14 +107,14 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 itemController.btn_expand_toggle.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (item.invisibleChildren == null) {
+                        if (item.getInvisibleChildren() == null) {
 
-                            item.invisibleChildren = new ArrayList<Item>();
+                            item.setInvisibleChildren(new ArrayList<Item>());
                             int count = 0;
                             int pos = data.indexOf(itemController.refferalItem);
 
-                            while (data.size() > pos + 1 && data.get(pos + 1).type == CHILD) {
-                                item.invisibleChildren.add(data.remove(pos + 1));
+                            while (data.size() > pos + 1 && data.get(pos + 1).getType() == CHILD) {
+                                item.getInvisibleChildren().add(data.remove(pos + 1));
                                 count++;
                             }
                             notifyItemRangeRemoved(pos + 1, count);
@@ -124,13 +124,13 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                             int pos = data.indexOf(itemController.refferalItem);
                             int index = pos + 1;
-                            for (Item i : item.invisibleChildren) {
+                            for (Item i : item.getInvisibleChildren()) {
                                 data.add(index, i);
                                 index++;
                             }
                             notifyItemRangeInserted(pos + 1, index - pos - 1);
                             itemController.btn_expand_toggle.setImageResource(R.mipmap.circle_minus);
-                            item.invisibleChildren = null;
+                            item.setInvisibleChildren(null);
 
                         }
                     }
@@ -148,8 +148,8 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 childitemController.contact.setGravity(Gravity.CENTER);
 
                 //childitemController.index.setText(item.dict.getIndex());
-                childitemController.name.setText(item.dict.getName());
-                childitemController.contact.setText(item.dict.getContact());
+                childitemController.name.setText(item.getDict().getName());
+                childitemController.contact.setText(item.getDict().getContact());
 
         }
     }
@@ -160,7 +160,7 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public int getItemViewType(int position) {
-        return data.get(position).type;
+        return data.get(position).getType();
     }
 
     public interface OnItemClickListener {
