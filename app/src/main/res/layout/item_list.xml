@@ -5,14 +5,6 @@
     android:layout_marginTop="18dp"
     >
 
-<!--    <TextView-->
-<!--        android:id="@+id/index_id"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_weight="0.5"-->
-<!--        android:gravity="center"-->
-<!--        android:text="index" />-->
-
     <TextView
         android:id="@+id/name_id"
         android:layout_width="0dp"
@@ -23,11 +15,10 @@
         android:text="name" />
 
     <TextView
-        android:id="@+id/contact_id"
+        android:id="@+id/rate_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="contact"
-        android:textColor="@color/pointblue"/>
+        android:text="contact" />
 </LinearLayout>

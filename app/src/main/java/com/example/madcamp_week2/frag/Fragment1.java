@@ -1,7 +1,5 @@
 package com.example.madcamp_week2.frag;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.madcamp_week2.MainActivity;
 import com.example.madcamp_week2.model.Dictionary;
 import com.example.madcamp_week2.adapter.DictionaryAdapter;
 import com.example.madcamp_week2.model.Item;
@@ -95,9 +94,10 @@ public class Fragment1 extends Fragment {
                     mAdapter.setOnItemClickListener(new DictionaryAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
-                            String phoneNumber = mArrayList.get(position).getDict().getContact();
-                            phoneNumber = phoneNumber.replace("-", "");
-                            startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber)));
+                            String restId = mArrayList.get(position).getId();
+                            MainActivity activity = (MainActivity)getActivity();
+                            if (activity != null)
+                                activity.switchToRestPage(restId);
                         }
                     });
 

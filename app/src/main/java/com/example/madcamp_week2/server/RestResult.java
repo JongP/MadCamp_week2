@@ -11,6 +11,15 @@ public class RestResult {
     private int rateNum;
     @SerializedName("_id")
     private String id;
+    private String photoURL;
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
+    }
 
     public void setRate(double rate) {
         this.rate = rate;

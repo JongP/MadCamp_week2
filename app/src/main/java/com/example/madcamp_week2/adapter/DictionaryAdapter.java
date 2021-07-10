@@ -17,6 +17,7 @@ import com.example.madcamp_week2.R;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
@@ -35,16 +36,16 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         //protected TextView index;
         protected TextView name;
-        protected TextView contact;
+        protected TextView rate;
 
         public DictionaryViewHolder(@NonNull @NotNull View itemView, OnItemClickListener listener) {
             super(itemView);
 
             //this.index = (TextView) itemView.findViewById(R.id.index_id);
             this.name = (TextView) itemView.findViewById(R.id.name_id);
-            this.contact = (TextView) itemView.findViewById(R.id.contact_id);
+            this.rate = (TextView) itemView.findViewById(R.id.rate_id);
 
-            this.contact.setOnClickListener(new View.OnClickListener() {
+            this.name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null){
@@ -139,17 +140,24 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             case CHILD:
                 DictionaryViewHolder childitemController = (DictionaryViewHolder) holder;
-                //childitemController.index.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+
                 childitemController.name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-                childitemController.contact.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                childitemController.rate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
 
-                //childitemController.index.setGravity(Gravity.CENTER);
                 childitemController.name.setGravity(Gravity.CENTER);
-                childitemController.contact.setGravity(Gravity.CENTER);
+                childitemController.rate.setGravity(Gravity.CENTER);
 
-                //childitemController.index.setText(item.dict.getIndex());
                 childitemController.name.setText(item.getDict().getName());
-                childitemController.contact.setText(item.getDict().getContact());
+
+                DecimalFormat format = new DecimalFormat("#,#0.0");
+                double rate = item.getRate();
+                if (item.getRateNum() == 0) {
+                    String settext = "rate : " + rate;
+                    childitemController.rate.setText(settext);
+                } else {
+                    String settext = "rate : " + (rate / item.getRateNum());
+                    childitemController.rate.setText(settext);
+                }
 
         }
     }
