@@ -3,6 +3,7 @@ package com.example.madcamp_week2.adapter;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -107,16 +108,20 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     @Override
                     public void onClick(View v) {
                         if (item.invisibleChildren == null) {
+
                             item.invisibleChildren = new ArrayList<Item>();
                             int count = 0;
                             int pos = data.indexOf(itemController.refferalItem);
+
                             while (data.size() > pos + 1 && data.get(pos + 1).type == CHILD) {
                                 item.invisibleChildren.add(data.remove(pos + 1));
                                 count++;
                             }
                             notifyItemRangeRemoved(pos + 1, count);
                             itemController.btn_expand_toggle.setImageResource(R.mipmap.circle_plus);
+
                         } else {
+
                             int pos = data.indexOf(itemController.refferalItem);
                             int index = pos + 1;
                             for (Item i : item.invisibleChildren) {
@@ -126,6 +131,7 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                             notifyItemRangeInserted(pos + 1, index - pos - 1);
                             itemController.btn_expand_toggle.setImageResource(R.mipmap.circle_minus);
                             item.invisibleChildren = null;
+
                         }
                     }
                 });

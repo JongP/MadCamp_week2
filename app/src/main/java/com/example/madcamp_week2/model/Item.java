@@ -26,13 +26,25 @@ public class Item {
         this.category = category;
     }
 
+    @Override
+    public String toString() {
+        if (dict == null) {
+            return category + " : No restaurant.";
+        } else{
+            return category + " : " + dict.getName();
+        }
+    }
 
     public boolean equals(Object obj) {
         if (obj instanceof Item) {
             Item i = (Item) obj;
 
+            // 둘다 식당이라면 비교
             if (this.dict != null && i.dict != null)
                 return i.dict.getName().equals(this.dict.getName());
+            // 둘다 헤더라면 비교
+            else if (this.dict == null && i.dict == null)
+                return i.getCategory().equals(this.getCategory());
         }
         return false;
     }
