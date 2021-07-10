@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.madcamp_week2.model.Dictionary;
 import com.example.madcamp_week2.adapter.DictionaryAdapter;
@@ -110,6 +111,7 @@ public class Fragment1 extends Fragment {
             @Override
             public void onFailure(Call<List<RestResult>> call, Throwable t) {
                 Log.d("serverError",t.getMessage());
+                Toast.makeText(getContext(), "Server is closed.", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -120,13 +122,13 @@ public class Fragment1 extends Fragment {
 
         for(RestResult restaurant : list){
 
-            Log.d("sat", "before");
+            //Log.d("sat", "before");
             dict = new Dictionary(restaurant.getName(), restaurant.getContact());
             if (mArrayList.size() > 0 &&  mArrayList.contains(new Item(restaurant.getCategory(), dict))){
-                Log.d("sat", "while");
+                //Log.d("sat", "while");
                 continue;
             }
-            Log.d("sat", "after");
+            //Log.d("sat", "after");
 
             switch (restaurant.getCategory()) {
                 case "한식":
