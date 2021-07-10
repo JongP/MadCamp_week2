@@ -1,22 +1,16 @@
-package com.example.madcamp_week2.frag;
+package com.example.madcamp_week2;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
-
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.madcamp_week2.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -25,23 +19,17 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+public class LoginActivity extends AppCompatActivity {
 
-public class Fragment3 extends Fragment {
-
-    private static final String LOG_TAG = "Fragment3";
     private GoogleSignInClient mGoogleSignInClient;
     private SignInButton btn_sign;
-    private String TAG = "good";
+    private String TAG = "Login Activity";
 
-
-    public Fragment3() {
-        // Required empty public constructor
-    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        Log.d("thisway", "onCreateView: there");
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
 
         //// 앱에 필요한 사용자 데이터를 요청하도록 로그인 옵션을 설정한다.
         //// DEFAULT_SIGN_IN parameter는 유저의 ID와 기본적인 프로필 정보를 요청하는데 사용된다.
@@ -50,28 +38,24 @@ public class Fragment3 extends Fragment {
                 .build();
         //
         //// 위에서 만든 GoogleSignInOptions을 사용해 GoogleSignInClient 객체를 만듬
-        mGoogleSignInClient = GoogleSignIn.getClient(getContext(), gso);
+        mGoogleSignInClient = GoogleSignIn.getClient(LoginActivity.this, gso);
+        // 기존에 로그인 했던 계정을 확인한다.
+        GoogleSignInAccount gsa = GoogleSignIn.getLastSignedInAccount(LoginActivity.this);
 
+// 로그인 되있는 경우
+        if (gsa != null) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
 
-    }
-
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        Log.d("thisway", "onCreateView: here");
-        View view = inflater.inflate(R.layout.fragment_3, container, false);
-
-        btn_sign = view.findViewById(R.id.sign_in_button);
-        btn_sign.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.login_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn();
+
             }
         });
 
-        return view;
     }
 
     private void signIn() {
@@ -91,10 +75,13 @@ public class Fragment3 extends Fragment {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
             Log.d("wak", "onActivityResult: sign in button visiblity");
-            btn_sign.setVisibility(View.GONE);
-            Toast.makeText(getContext(),"Login Success",Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this,"Login Success",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+            startActivity(intent);
         }
-
+        else{
+            Toast.makeText(LoginActivity.this,"Login failed",Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
