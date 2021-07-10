@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.madcamp_week2.server.RestResult;
 import com.example.madcamp_week2.server.RetrofitInterface;
+import com.example.madcamp_week2.user.UserData;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -59,6 +60,9 @@ public class LoginActivity extends AppCompatActivity {
 
 // 로그인 되있는 경우
         if (gsa != null) {
+            UserData userData = new UserData();
+            userData.setId(gsa.getId());
+
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
@@ -150,6 +154,10 @@ public class LoginActivity extends AppCompatActivity {
                 String personEmail = acct.getEmail();
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
+
+
+                UserData userData = new UserData();
+                userData.setId(acct.getId());
 
                 Log.d(TAG, "handleSignInResult:personName "+personName);
                 Log.d(TAG, "handleSignInResult:personGivenName "+personGivenName);
