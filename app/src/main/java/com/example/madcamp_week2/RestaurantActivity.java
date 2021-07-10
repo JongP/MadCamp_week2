@@ -9,6 +9,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import com.example.madcamp_week2.frag.Fragment3;
 import com.example.madcamp_week2.server.RestResult;
 import com.example.madcamp_week2.server.RetrofitInterface;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -74,6 +77,7 @@ public class RestaurantActivity extends AppCompatActivity {
                     TextView rate = findViewById(R.id.rest_rate_id);
                     TextView category = findViewById(R.id.rest_category_id);
                     restImg = findViewById(R.id.rest_image_id);
+                    Button write_button = findViewById(R.id.btn_write_review_id);
 
                     restName.setText(restResult.getName());
                     contact.setText(restResult.getContact());
@@ -86,6 +90,15 @@ public class RestaurantActivity extends AppCompatActivity {
                     Log.d("getOne", restResult.getName());
                     Log.d("getOne", restResult.getContact());
                     Log.d("getOne", restResult.getCategory());
+
+                    write_button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getApplicationContext(), WritePostActivity.class);
+                            intent.putExtra("restId", restId);
+                            startActivity(intent);
+                        }
+                    });
 
                 } else if (response.code() == 400) {
 

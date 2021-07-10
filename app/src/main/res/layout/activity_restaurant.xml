@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".RestaurantActivity">
 
+    <Button
+        android:id="@+id/btn_see_review_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  see reviews  "
+        android:textColor="@color/purple_700"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.896"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rest_rate_id"
+        app:layout_constraintVertical_bias="0.106" />
+
     <ImageView
         android:id="@+id/rest_image_id"
         android:layout_width="409dp"
@@ -59,8 +72,8 @@
         android:id="@+id/rest_rate_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="28dp"
         android:text="rate"
         android:textColor="@color/black"
         android:textSize="16sp"
@@ -68,15 +81,16 @@
         app:layout_constraintTop_toBottomOf="@+id/rest_image_id" />
 
     <Button
-        android:id="@+id/btn_see_review_id"
+        android:id="@+id/btn_write_review_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="see reviews"
+        android:text="write reviews"
         android:textColor="@color/purple_700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.942"
+        app:layout_constraintHorizontal_bias="0.895"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rest_rate_id"
+        app:layout_constraintTop_toBottomOf="@+id/btn_see_review_id"
         app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

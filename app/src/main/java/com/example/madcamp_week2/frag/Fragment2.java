@@ -22,6 +22,7 @@ import com.example.madcamp_week2.Restaurants;
 import com.example.madcamp_week2.server.RestResult;
 import com.example.madcamp_week2.server.RetrofitInterface;
 import com.example.madcamp_week2.user.UserData;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -105,39 +106,6 @@ public class Fragment2 extends Fragment {
 
         activity = (MainActivity) getActivity();
         adapter = new GalleryAdapter(activity, list, Restaurants.rest_images);
-    }
-
-    private void sendPost() {
-        retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        retrofitInterface = retrofit.create(RetrofitInterface.class);
-
-        UserData userData = new UserData();
-        Log.d("static test", "onCreate: "+userData.getId());
-
-        HashMap<String,String> map =  new HashMap<>();
-        map.put("title","test_title");
-        map.put("contnent","test_content");
-        map.put("rate","4");
-        map.put("rest","60e97819d7eff862aeb8f93b");
-        map.put("user",userData.getId());
-        Call<Void> call = retrofitInterface.executePostAdd(map);
-
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if(response.code()==200) Log.d(TAG, "onResponse: response 200");
-                else Log.d(TAG, "onResponse: response other");
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Log.d(TAG, t.getMessage());
-            }
-        });
-
-
     }
 
     @Override

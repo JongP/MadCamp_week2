@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WritePostActivity">
+
+    <Button
+        android:id="@+id/btn_add_img_id"
+        android:layout_width="164dp"
+        android:layout_height="37dp"
+        android:text="add image"
+        android:textColor="#BCBCBC"
+        app:layout_constraintBottom_toTopOf="@+id/edit_title_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.48" />
+
+    <EditText
+        android:id="@+id/edit_title_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:ems="10"
+        android:inputType="text"
+        android:maxLength="1000"
+        android:hint="post title"
+        android:textColor="#FFBCBCBC"
+        app:layout_constraintBottom_toTopOf="@+id/edit_content_id"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/edit_content_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="524dp"
+        android:ems="10"
+        android:inputType="text"
+        android:maxLength="1000"
+        android:hint="post content"
+        android:textColor="#FFBCBCBC"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/upload_id"
+        android:layout_width="164dp"
+        android:layout_height="37dp"
+        android:text="enter"
+        android:textColor="#FFBCBCBC"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintVertical_bias="0.054" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="413dp"
+        android:layout_height="83dp"
+        android:layout_marginTop="28dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_content_id">
+
+        <RadioButton
+            android:id="@+id/rg_btn0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="완전 별로 (1점)" />
+
+        <RadioButton
+            android:id="@+id/rg_btn1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="좀 별로 (2점)" />
+
+        <RadioButton
+            android:id="@+id/rg_btn2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="그냥 평범 (3점)" />
+
+        <RadioButton
+            android:id="@+id/rg_btn3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="꽤 괜찮음 (4점)" />
+
+        <RadioButton
+            android:id="@+id/rg_btn4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="완전 맛집 (5점)" />
+
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
