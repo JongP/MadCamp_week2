@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.896"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rest_rate_id"
+        app:layout_constraintTop_toBottomOf="@+id/btn_favorite_id"
         app:layout_constraintVertical_bias="0.106" />
 
     <ImageView
@@ -72,8 +72,8 @@
         android:id="@+id/rest_rate_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginTop="280dp"
+        android:layout_marginEnd="192dp"
         android:text="rate"
         android:textColor="@color/black"
         android:textSize="16sp"
@@ -92,5 +92,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_see_review_id"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btn_favorite_id"
+        android:layout_width="87dp"
+        android:layout_height="38dp"
+        android:text="favorite"
+        android:textColor="#BCBCBC"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.815"
+        app:layout_constraintStart_toEndOf="@+id/rest_name_id"
+        tools:layout_editor_absoluteY="385dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

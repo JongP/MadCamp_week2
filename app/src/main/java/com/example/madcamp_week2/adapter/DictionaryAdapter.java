@@ -3,7 +3,6 @@ package com.example.madcamp_week2.adapter;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -42,7 +41,7 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             super(itemView);
 
             //this.index = (TextView) itemView.findViewById(R.id.index_id);
-            this.name = (TextView) itemView.findViewById(R.id.name_id);
+            this.name = (TextView) itemView.findViewById(R.id.name);
             this.rate = (TextView) itemView.findViewById(R.id.rate_id);
 
             this.name.setOnClickListener(new View.OnClickListener() {
