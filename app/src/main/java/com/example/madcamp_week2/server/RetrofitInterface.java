@@ -22,8 +22,10 @@ public interface RetrofitInterface {
     Call<Void> executePostAdd(@Body HashMap<String,String> map);
 
     @POST("/user/add")
-    Call<Void> executeSingup(@Body HashMap<String,String> map);
+    Call<Void> executeSignup(@Body HashMap<String,String> map);
 
+    @POST("/rest/getone")
+    Call<RestResult> executeGetOneRest(@Body HashMap<String, String> map);
 
 
     @GET("/rest/getall")

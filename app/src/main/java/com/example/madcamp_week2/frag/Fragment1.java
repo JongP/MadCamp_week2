@@ -1,7 +1,5 @@
 package com.example.madcamp_week2.frag;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.madcamp_week2.MainActivity;
 import com.example.madcamp_week2.model.Dictionary;
 import com.example.madcamp_week2.adapter.DictionaryAdapter;
 import com.example.madcamp_week2.model.Item;
@@ -95,9 +94,10 @@ public class Fragment1 extends Fragment {
                     mAdapter.setOnItemClickListener(new DictionaryAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
-                            String phoneNumber = mArrayList.get(position).dict.getContact();
-                            phoneNumber = phoneNumber.replace("-", "");
-                            startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber)));
+                            String restId = mArrayList.get(position).getId();
+                            MainActivity activity = (MainActivity)getActivity();
+                            if (activity != null)
+                                activity.switchToRestPage(restId);
                         }
                     });
 
@@ -122,13 +122,29 @@ public class Fragment1 extends Fragment {
 
         for(RestResult restaurant : list){
 
-            //Log.d("sat", "before");
-            dict = new Dictionary(restaurant.getName(), restaurant.getContact());
-            if (mArrayList.size() > 0 &&  mArrayList.contains(new Item(restaurant.getCategory(), dict))){
-                //Log.d("sat", "while");
-                continue;
+            boolean dup = false;
+
+            for (Item i : mArrayList) {
+                if (i.getType() == 1 && i.getId().equals(restaurant.getId())) {
+                    dup = true;
+                    break;
+                }
+                if (i.getType() == 0 && i.getInvisibleChildren() != null) {
+                    for (Item j : i.getInvisibleChildren()) {
+                        if (j.getId().equals(restaurant.getId())) {
+                            dup = true;
+                            break;
+                        }
+                    }
+                    if (dup) break;
+                }
+
             }
-            //Log.d("sat", "after");
+            if (dup) continue;;
+
+            String name = restaurant.getName();
+            String id = restaurant.getId();
+            String contact = restaurant.getContact();
 
             switch (restaurant.getCategory()) {
                 case "한식":
@@ -144,12 +160,12 @@ public class Fragment1 extends Fragment {
                     numEachCategory[0]++;
                     index = numEachCategory[0];
 
-                    dict = new Dictionary(restaurant.getName(), restaurant.getContact());
+                    dict = new Dictionary(name, contact);
 
                     if (mArrayList.size() > index)
-                        mArrayList.add(index, new Item("한식", dict));
+                        mArrayList.add(index, new Item("한식", id, dict));
                     else
-                        mArrayList.add(new Item("한식", dict));
+                        mArrayList.add(new Item("한식", id, dict));
 
                     //Log.d("evening", "한식 Item : " + mArrayList.get(index).dict.getName());
 
@@ -166,12 +182,12 @@ public class Fragment1 extends Fragment {
                     numEachCategory[1]++;
                     index = numEachCategory[0] + 1 + numEachCategory[1];
 
-                    dict = new Dictionary(restaurant.getName(), restaurant.getContact());
+                    dict = new Dictionary(name, contact);
 
                     if (mArrayList.size() > index)
-                        mArrayList.add(index, new Item("일식", dict));
+                        mArrayList.add(index, new Item("일식", id, dict));
                     else
-                        mArrayList.add(new Item("일식", dict));
+                        mArrayList.add(new Item("일식", id, dict));
                     break;
 
                 case "양식":
@@ -188,12 +204,12 @@ public class Fragment1 extends Fragment {
                             + numEachCategory[1] + 1
                             + numEachCategory[2];
 
-                    dict = new Dictionary(restaurant.getName(), restaurant.getContact());
+                    dict = new Dictionary(name, contact);
 
                     if (mArrayList.size() > index)
-                        mArrayList.add(index, new Item("양식", dict));
+                        mArrayList.add(index, new Item("양식", id, dict));
                     else
-                        mArrayList.add(new Item("양식", dict));
+                        mArrayList.add(new Item("양식", id, dict));
                     break;
 
                 case "Pub & Bar":
@@ -214,12 +230,12 @@ public class Fragment1 extends Fragment {
                             + numEachCategory[3] + 1
                             + numEachCategory[4];
 
-                    dict = new Dictionary(restaurant.getName(), restaurant.getContact());
+                    dict = new Dictionary(name, contact);
 
                     if (mArrayList.size() > index)
-                        mArrayList.add(index, new Item("Pub & Bar", dict));
+                        mArrayList.add(index, new Item("Pub & Bar", id, dict));
                     else
-                        mArrayList.add(new Item("Pub & Bar", dict));
+                        mArrayList.add(new Item("Pub & Bar", id, dict));
                     break;
 
                 default:
@@ -238,11 +254,11 @@ public class Fragment1 extends Fragment {
                             + numEachCategory[2] + 1
                             + numEachCategory[3];
 
-                    dict = new Dictionary(restaurant.getName(), restaurant.getContact());
+                    dict = new Dictionary(name, contact);
                     if (mArrayList.size() > index)
-                        mArrayList.add(index, new Item("기타 외국 음식", dict));
+                        mArrayList.add(index, new Item("기타 외국 음식", id, dict));
                     else
-                        mArrayList.add(new Item("기타 외국 음식", dict));
+                        mArrayList.add(new Item("기타 외국 음식", id, dict));
                     break;
             }
         }

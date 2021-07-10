@@ -50,9 +50,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void switchPage(int position) {
+    public void switchToImagePage(int position) {
         Intent intent = new Intent(this, ImageSliderActivity.class);
         intent.putExtra("position", position);
+        startActivity(intent);
+    }
+
+    public void switchToRestPage(String id) {
+        Intent intent = new Intent(this, RestaurantActivity.class);
+        intent.putExtra("restId", id);
         startActivity(intent);
     }
 

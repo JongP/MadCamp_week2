@@ -78,11 +78,12 @@ public class LoginActivity extends AppCompatActivity {
 
     private void server_add_user() {
         HashMap<String , String> map = new HashMap<>();
+        if(acct==null) return;;
         map.put("id", acct.getId());
         map.put("name", acct.getDisplayName());
 
 
-        Call<Void> call = retrofitInterface.executeSingup(map);
+        Call<Void> call = retrofitInterface.executeSignup(map);
 
         call.enqueue(new Callback<Void>() {
             @Override

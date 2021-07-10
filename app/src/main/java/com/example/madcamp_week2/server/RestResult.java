@@ -9,6 +9,29 @@ public class RestResult {
     private String category;
     private double rate;
     private int rateNum;
+    @SerializedName("_id")
+    private String id;
+    private String photoURL;
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getCategory() {
         return category;

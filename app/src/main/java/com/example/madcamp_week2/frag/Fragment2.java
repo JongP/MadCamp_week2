@@ -183,7 +183,7 @@ public class Fragment2 extends Fragment {
             @Override
             public void onItemClick(int position) {
                 MainActivity activity = (MainActivity)getActivity();
-                activity.switchPage(position);
+                activity.switchToImagePage(position);
             }
         });
 
