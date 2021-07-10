@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MadCamp_Week1"
         android:usesCleartextTraffic="true">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

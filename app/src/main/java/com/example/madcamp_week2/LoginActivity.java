@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.madcamp_week2.server.RestResult;
+import com.example.madcamp_week2.server.RetrofitInterface;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -19,11 +21,24 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import java.util.HashMap;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class LoginActivity extends AppCompatActivity {
 
     private GoogleSignInClient mGoogleSignInClient;
     private SignInButton btn_sign;
     private String TAG = "Login Activity";
+    private String BASE_URL = "http://192.249.18.117:80";
+    private Retrofit retrofit;
+    private RetrofitInterface retrofitInterface;
+    private GoogleSignInAccount acct;
 
 
     @Override
@@ -52,6 +67,36 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signIn();
+            }
+        });
+
+    }
+
+    private void server_add_user() {
+        HashMap<String , String> map = new HashMap<>();
+        map.put("id", acct.getId());
+        map.put("name", acct.getDisplayName());
+
+
+        Call<Void> call = retrofitInterface.executeSingup(map);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.code() == 200) {
+                    Toast.makeText(LoginActivity.this,
+                            "Signed up successfully", Toast.LENGTH_SHORT).show();
+                } else if (response.code() == 400) {
+                    Toast.makeText(LoginActivity.this,
+                            "Already registered", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(LoginActivity
+                                .this, t.getMessage(),
+                        Toast.LENGTH_LONG).show();
 
             }
         });
@@ -76,8 +121,18 @@ public class LoginActivity extends AppCompatActivity {
             handleSignInResult(task);
             Log.d("wak", "onActivityResult: sign in button visiblity");
             Toast.makeText(LoginActivity.this,"Login Success",Toast.LENGTH_SHORT).show();
+
+            retrofit=new Retrofit.Builder().baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            retrofitInterface = retrofit.create(RetrofitInterface.class);
+
+            server_add_user();
+
             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
             startActivity(intent);
+
+
         }
         else{
             Toast.makeText(LoginActivity.this,"Login failed",Toast.LENGTH_SHORT).show();
@@ -86,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
-            GoogleSignInAccount acct = completedTask.getResult(ApiException.class);
+            acct = completedTask.getResult(ApiException.class);
 
             if (acct != null) {
                 String personName = acct.getDisplayName();

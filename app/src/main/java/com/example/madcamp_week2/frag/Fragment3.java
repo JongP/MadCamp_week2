@@ -2,7 +2,10 @@ package com.example.madcamp_week2.frag;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -14,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.madcamp_week2.R;
@@ -25,10 +30,18 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+
 
 public class Fragment3 extends Fragment {
 
     private static final String LOG_TAG = "Fragment3";
+    private ImageView iv_user;
+    private TextView tv_userName, tv_userEmail;
     private GoogleSignInClient mGoogleSignInClient;
     private SignInButton btn_sign;
     private String TAG = "good";
@@ -43,14 +56,17 @@ public class Fragment3 extends Fragment {
         Log.d("thisway", "onCreateView: there");
         super.onCreate(savedInstanceState);
 
-        //// 앱에 필요한 사용자 데이터를 요청하도록 로그인 옵션을 설정한다.
-        //// DEFAULT_SIGN_IN parameter는 유저의 ID와 기본적인 프로필 정보를 요청하는데 사용된다.
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()// email addresses도 요청함
-                .build();
-        //
-        //// 위에서 만든 GoogleSignInOptions을 사용해 GoogleSignInClient 객체를 만듬
-        mGoogleSignInClient = GoogleSignIn.getClient(getContext(), gso);
+        //GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+       //         .requestEmail()// email addresses도 요청함
+         //       .build();
+
+        //mGoogleSignInClient = GoogleSignIn.getClient(getContext(), gso);
+
+        GoogleSignInAccount gsa = GoogleSignIn.getLastSignedInAccount(getContext());
+        if(gsa!=null){
+            Log.d("Frag3: getting Id",gsa.getId());
+        }
+
 
 
     }
@@ -60,67 +76,52 @@ public class Fragment3 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d("thisway", "onCreateView: here");
+        //Log.d("thisway", "onCreateView: here");
         View view = inflater.inflate(R.layout.fragment_3, container, false);
 
-        btn_sign = view.findViewById(R.id.sign_in_button);
-        btn_sign.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signIn();
-            }
-        });
+
+        iv_user = view.findViewById(R.id.iv_user);
+        tv_userEmail = view.findViewById(R.id.tv_userEmail);
+        tv_userName = view.findViewById(R.id.tv_userName);
+
+        GoogleSignInAccount gsa = GoogleSignIn.getLastSignedInAccount(getContext());
+        if(gsa!=null){
+            Log.d("Frag3: getting email",gsa.getPhotoUrl().toString());
+
+            tv_userName.setText(gsa.getDisplayName());
+            tv_userEmail.setText(gsa.getEmail());
+            //iv_user.setImageURI(gsa.getPhotoUrl());
+
+            new LoadImage().execute(gsa.getPhotoUrl().toString());
+
+            //Bitmap bitmap = getImageBitmap(gsa.getPhotoUrl().toString());
+            //iv_user.setImageBitmap(bitmap);
+
+
+        }
+
 
         return view;
     }
 
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, 400);
-    }
-
-    @SuppressLint("WrongConstant")
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode == 400) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-            Log.d("wak", "onActivityResult: sign in button visiblity");
-            btn_sign.setVisibility(View.GONE);
-            Toast.makeText(getContext(),"Login Success",Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            GoogleSignInAccount acct = completedTask.getResult(ApiException.class);
-
-            if (acct != null) {
-                String personName = acct.getDisplayName();
-                String personGivenName = acct.getGivenName();
-                String personFamilyName = acct.getFamilyName();
-                String personEmail = acct.getEmail();
-                String personId = acct.getId();
-                Uri personPhoto = acct.getPhotoUrl();
-
-                Log.d(TAG, "handleSignInResult:personName "+personName);
-                Log.d(TAG, "handleSignInResult:personGivenName "+personGivenName);
-                Log.d(TAG, "handleSignInResult:personEmail "+personEmail);
-                Log.d(TAG, "handleSignInResult:personId "+personId);
-                Log.d(TAG, "handleSignInResult:personFamilyName "+personFamilyName);
-                Log.d(TAG, "handleSignInResult:personPhoto "+personPhoto);
+    private class LoadImage extends AsyncTask<String, Void, Bitmap> {
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            Bitmap bitmap = null;
+            try {
+                InputStream inputStream = new URL(strings[0]).openStream();
+                bitmap = BitmapFactory.decodeStream(inputStream);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.e(TAG, "signInResult:failed code=" + e.getStatusCode());
+            return bitmap;
+        }
 
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            iv_user.setImageBitmap(bitmap);
         }
     }
+
+
 }

@@ -18,10 +18,11 @@ public interface RetrofitInterface {
     @POST("/test/signup")
     Call<Void> executeSignup(@Body HashMap<String, String> map);
 */
-    @POST("/test/signup")
-    Call<Void> executeSignup(@Body HashMap<String, String> map);
+    //@POST("/test/signup")
+    //Call<Void> executeSignup(@Body HashMap<String, String> map);
 
-
+    @POST("/user/add")
+    Call<Void> executeSingup(@Body HashMap<String,String> map);
 
 
 
