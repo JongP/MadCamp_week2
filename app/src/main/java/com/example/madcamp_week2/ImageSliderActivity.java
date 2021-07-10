@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.madcamp_week2.adapter.ImageSliderAdapter;
+
 public class ImageSliderActivity extends AppCompatActivity {
     private ViewPager2 sliderViewPager;
     private LinearLayout layoutIndicator;

@@ -1,7 +1,6 @@
-package com.example.madcamp_week2;
+package com.example.madcamp_week2.frag;
 
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -14,19 +13,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import com.example.madcamp_week2.model.Dictionary;
+import com.example.madcamp_week2.adapter.DictionaryAdapter;
+import com.example.madcamp_week2.model.Item;
+import com.example.madcamp_week2.R;
 import com.example.madcamp_week2.server.RestResult;
 import com.example.madcamp_week2.server.RetrofitInterface;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.madcamp_week2;
+package com.example.madcamp_week2.model;
 
 import java.util.ArrayList;
 

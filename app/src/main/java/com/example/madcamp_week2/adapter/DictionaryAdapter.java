@@ -1,4 +1,4 @@
-package com.example.madcamp_week2;
+package com.example.madcamp_week2.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.madcamp_week2.model.Item;
+import com.example.madcamp_week2.R;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -1,4 +1,4 @@
-package com.example.madcamp_week2;
+package com.example.madcamp_week2.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.example.madcamp_week2.R;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import androidx.annotation.NonNull;

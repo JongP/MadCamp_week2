@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.madcamp_week2.Fragment1;
-import com.example.madcamp_week2.Fragment2;
-import com.example.madcamp_week2.Fragment3;
+import com.example.madcamp_week2.frag.Fragment1;
+import com.example.madcamp_week2.frag.Fragment2;
+import com.example.madcamp_week2.frag.Fragment3;
 import com.example.madcamp_week2.R;
 
 import java.util.ArrayList;
