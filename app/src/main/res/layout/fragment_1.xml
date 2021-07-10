@@ -19,19 +19,4 @@
         android:layout_height="match_parent"
         android:layout_weight="1"/>
 
-    <TextView
-        android:id="@+id/tv_test"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="4"
-        android:textColor="@color/black"
-        android:text="hello"/>
-    <Button
-        android:id="@+id/btn_test"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="send"
-        android:backgroundTint="@color/purple_200"
-        android:layout_weight="4"/>
-
 </LinearLayout>

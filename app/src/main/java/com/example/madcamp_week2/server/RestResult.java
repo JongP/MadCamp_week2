@@ -4,13 +4,19 @@ import com.google.gson.annotations.SerializedName;
 
 public class RestResult {
     private String name;
-
     @SerializedName("contact")
     private String contact;
-
-    private float rate;
+    private String category;
+    private double rate;
     private int rateNum;
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getName() {
         return name;
@@ -28,7 +34,7 @@ public class RestResult {
         this.contact = contact;
     }
 
-    public float getRate() {
+    public double getRate() {
         return rate;
     }
 
