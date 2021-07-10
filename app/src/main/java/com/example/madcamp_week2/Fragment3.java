@@ -101,6 +101,7 @@ public class Fragment3 extends Fragment {
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
 
+
                 Log.d(TAG, "handleSignInResult:personName "+personName);
                 Log.d(TAG, "handleSignInResult:personGivenName "+personGivenName);
                 Log.d(TAG, "handleSignInResult:personEmail "+personEmail);
