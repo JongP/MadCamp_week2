@@ -26,6 +26,17 @@ public class Item {
         this.category = category;
     }
 
+
+    public boolean equals(Object obj) {
+        if (obj instanceof Item) {
+            Item i = (Item) obj;
+
+            if (this.dict != null && i.dict != null)
+                return i.dict.getName().equals(this.dict.getName());
+        }
+        return false;
+    }
+
     public int getType() {
         return type;
     }

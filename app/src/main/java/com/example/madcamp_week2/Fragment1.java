@@ -44,6 +44,8 @@ public class Fragment1 extends Fragment {
     private RetrofitInterface retrofitInterface;
     private String BASE_URL = "http://192.249.18.117:80";
     RecyclerView mRecyclerView;
+    private static int flag = 0;
+    int[] numEachCategory = new int[5];
 
     public Fragment1() {
         // Required empty public constructor
@@ -52,6 +54,7 @@ public class Fragment1 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -70,22 +73,6 @@ public class Fragment1 extends Fragment {
         retrofitInterface = retrofit.create(RetrofitInterface.class);
 
         handleTestServer();
-
-        Log.i("evening", mArrayList.toString());
-
-        for(Item i : mArrayList) {
-            if (i.type == 0) {
-                Log.d("evening", i.getCategory());
-                Log.d("evening", "type 0");
-            } else if (i.type == 1) {
-                Log.d("evening", i.getDict().getName());
-                Log.d("evening", "type 1");
-
-            }
-            Log.d("evening", "in for");
-
-        }
-
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(), mLinearLayoutManager.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
@@ -134,12 +121,18 @@ public class Fragment1 extends Fragment {
     }
 
     private void parsingRestResult(List<RestResult> list) {
-
-        int[] numEachCategory = new int[5];
         Dictionary dict;
         int index;
 
         for(RestResult restaurant : list){
+
+            Log.d("sat", "before");
+            dict = new Dictionary(restaurant.getName(), restaurant.getContact());
+            if (mArrayList.size() > 0 &&  mArrayList.contains(new Item(restaurant.getCategory(), dict))){
+                Log.d("sat", "while");
+                continue;
+            }
+            Log.d("sat", "after");
 
             switch (restaurant.getCategory()) {
                 case "한식":
@@ -162,7 +155,7 @@ public class Fragment1 extends Fragment {
                     else
                         mArrayList.add(new Item("한식", dict));
 
-                    Log.d("evening", "한식 Item : " + mArrayList.get(index).dict.getName());
+                    //Log.d("evening", "한식 Item : " + mArrayList.get(index).dict.getName());
 
                     break;
 
