@@ -61,8 +61,8 @@ public class Fragment2 extends Fragment {
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
     private String BASE_URL = "http://192.249.18.81:80";
-    private String TAG = "Frag2: ";
-    String restName;
+    private String TAG = "Frag2";
+    RecyclerView recyclerView;
 
     public Fragment2() {
         // Required empty public constructor
@@ -79,63 +79,31 @@ public class Fragment2 extends Fragment {
 
         list = new ArrayList<>();
 
+        Log.d(TAG, "before handle server");
         handleServer();
+        Log.d(TAG, "handle server done");
 
-        activity = (MainActivity) getActivity();
-        adapter = new GalleryAdapter(activity, list, Restaurants.rest_images);
+        Log.d(TAG, "onCreate done. gallery adapter created");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        Log.d(TAG, "onCreateView start");
+
         View v = inflater.inflate(R.layout.fragment_2, container, false);
 
-        RecyclerView recyclerView = v.findViewById(R.id.recycler_view);
+        recyclerView = v.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-        adapter.setItemViewType(GalleryAdapter.LIST);
-
-        ImageButton grid_button = v.findViewById(R.id.grid_button);
-        ImageButton list_button = v.findViewById(R.id.list_button);
-
-//        grid_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                adapter.setItemViewType(GalleryAdapter.GRID);
-//                Drawable img_grid = getActivity().getResources().getDrawable(R.drawable.grid_on);
-//                Drawable img_list = getActivity().getResources().getDrawable(R.drawable.list_off);
-//                grid_button.setBackground(img_grid);
-//                list_button.setBackground(img_list);
-//                recyclerView.setLayoutManager(new GridLayoutManager(activity, 3));
-//            }
-//        });
-
-        list_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                adapter.setItemViewType(GalleryAdapter.LIST);
-                Drawable img_grid = getActivity().getResources().getDrawable(R.drawable.grid_off);
-                Drawable img_list = getActivity().getResources().getDrawable(R.drawable.list_on);
-                grid_button.setBackground(img_grid);
-                list_button.setBackground(img_list);
-                recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-            }
-        });
-
-        recyclerView.setAdapter(adapter);
-
-        adapter.setOnItemClickListener(new GalleryAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                MainActivity activity = (MainActivity)getActivity();
-                activity.switchToImagePage(position);
-            }
-        });
+        Log.d(TAG, "set linear layout manager");
 
         return v;
     }
 
     private void handleServer() {
+
+        Log.d(TAG, "handle server start");
 
         Call<List<PostResult>> call = retrofitInterface.executeGetAllPost();
 
@@ -144,12 +112,23 @@ public class Fragment2 extends Fragment {
             public void onResponse(Call<List<PostResult>> call, Response<List<PostResult>> response) {
                 if(response.code()==200){
 
+                    Log.d(TAG, "handle server onResponse");
+
                     List<PostResult> postlist = response.body();
 
                     parsingPostResult(postlist);
 
+                    activity = (MainActivity) getActivity();
+                    adapter = new GalleryAdapter(activity, list, Restaurants.rest_images);
+
+                    recyclerView.setAdapter(adapter);
+                    Log.d(TAG, "adapter is attached to recyclerView");
+
+                    Log.d(TAG, "parsing Post result done");
+
                 }else if(response.code()==400){
 
+                    Log.d(TAG, "onResponse somehow failed");
                 }
 
             }
@@ -157,6 +136,7 @@ public class Fragment2 extends Fragment {
             public void onFailure(Call<List<PostResult>> call, Throwable t) {
 
                 Toast.makeText(getContext(), "Server is closed.", Toast.LENGTH_LONG).show();
+                Log.d(TAG, "handle server onFailure");
             }
         });
     }

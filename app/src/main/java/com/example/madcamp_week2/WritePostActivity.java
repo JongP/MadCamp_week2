@@ -81,14 +81,18 @@ public class WritePostActivity extends AppCompatActivity {
         rateButtons[3] = findViewById(R.id.rg_btn3);
         rateButtons[4] = findViewById(R.id.rg_btn4);
 
+        Log.d("sat", "writePostActivity onCreate");
+
         upload_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (editTitle.getText().toString().equals("") || editContent.getText().toString().equals(""))
+                Log.d("sat", "post upload button onClick");
+
+                if (editTitle.getText().toString().length() == 0 || editContent.getText().toString().length() == 0)
                     return;
 
-                if(selectedImageUri==null) return;
+                //if(selectedImageUri==null) return;
 
                 Log.d("sat", "editText and uri succeed");
 
@@ -106,10 +110,12 @@ public class WritePostActivity extends AppCompatActivity {
                 if (!uploadable)
                     return;
 
-                //sendPost(rate);
-                sendPostTest(rate);
+                sendPost(rate);
+                //sendPostTest(rate);
 
                 Log.d("sat", "sendPost done");
+
+                finish();
             }
         });
 
@@ -171,7 +177,7 @@ public class WritePostActivity extends AppCompatActivity {
 
     private void sendPostTest(int rateNum) {
 
-        Log.d("sat", "start sendPost");
+        Log.d("sat", "start sendPostTest");
         HashMap<String,RequestBody> map =  new HashMap<>();
 
         RequestBody title = RequestBody.create(MediaType.parse("text/plain"),editTitle.getText().toString());
@@ -185,6 +191,8 @@ public class WritePostActivity extends AppCompatActivity {
         map.put("rate", rate);
         map.put("rest",rest);
         map.put("user",user);
+
+        Log.d("sat", "map put done");
 
         //filepath는 String 변수로 갤러리에서 이미지를 가져올 때 photoUri.getPath()를 통해 받아온다.
         File file = new File(selectedImageUri.getPath());
@@ -200,7 +208,7 @@ public class WritePostActivity extends AppCompatActivity {
         RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpg"), byteArrayOutputStream.toByteArray());
         MultipartBody.Part uploadFile = MultipartBody.Part.createFormData("postImg", file.getName() ,requestBody);
 
-        //Log.d("sat", "106592296388275140582");
+        Log.d("sat", "before call");
 
         Call<Void> call = retrofitInterface.executePostAddTest(uploadFile,map);
 
@@ -212,13 +220,14 @@ public class WritePostActivity extends AppCompatActivity {
                     Toast.makeText(WritePostActivity.this, "Post upload succeed", Toast.LENGTH_LONG).show();
                     Log.d("sat", "post upload");
                 }else{
-                    Log.d("sat", "post upload w/ other response");
+                    Log.d("sat", "Post upload failed : onResponse");
+                    Toast.makeText(WritePostActivity.this, "Post upload failed : onResponse", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(WritePostActivity.this, "Post upload failed", Toast.LENGTH_LONG).show();
+                Toast.makeText(WritePostActivity.this, "Post upload failed : onFailure", Toast.LENGTH_LONG).show();
 
             }
         });
