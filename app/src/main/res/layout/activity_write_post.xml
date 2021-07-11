@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".WritePostActivity">
 
+    <ImageView
+        android:id="@+id/iv_add_img_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_launcher_background"
+        />
+
     <Button
         android:id="@+id/btn_add_img_id"
         android:layout_width="164dp"
@@ -105,5 +117,27 @@
             android:text="완전 맛집 (5점)" />
 
     </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upload_id"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/iv_get_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher_background"/>
+        <Button
+            android:id="@+id/btn_get_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="get Image"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
