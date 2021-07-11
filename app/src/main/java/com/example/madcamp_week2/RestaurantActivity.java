@@ -37,7 +37,7 @@ public class RestaurantActivity extends AppCompatActivity {
 
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-    private String BASE_URL = "http://192.249.18.117:80";
+    private String BASE_URL = "http://192.249.18.81:80";
     private String restId;
     private ImageView restImg;
 
@@ -78,6 +78,7 @@ public class RestaurantActivity extends AppCompatActivity {
                     TextView category = findViewById(R.id.rest_category_id);
                     restImg = findViewById(R.id.rest_image_id);
                     Button write_button = findViewById(R.id.btn_write_review_id);
+                    Button favorite_button = findViewById(R.id.btn_favorite_id);
 
                     restName.setText(restResult.getName());
                     contact.setText(restResult.getContact());
@@ -97,6 +98,13 @@ public class RestaurantActivity extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(), WritePostActivity.class);
                             intent.putExtra("restId", restId);
                             startActivity(intent);
+                        }
+                    });
+
+                    favorite_button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
                         }
                     });
 

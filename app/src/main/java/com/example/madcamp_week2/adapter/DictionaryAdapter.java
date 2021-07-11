@@ -42,7 +42,7 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             super(itemView);
 
             //this.index = (TextView) itemView.findViewById(R.id.index_id);
-            this.name = (TextView) itemView.findViewById(R.id.name_id);
+            this.name = (TextView) itemView.findViewById(R.id.name);
             this.rate = (TextView) itemView.findViewById(R.id.rate_id);
 
             this.name.setOnClickListener(new View.OnClickListener() {

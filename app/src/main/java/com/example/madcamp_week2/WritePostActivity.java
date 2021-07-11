@@ -39,7 +39,7 @@ public class WritePostActivity extends AppCompatActivity {
 
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-    private String BASE_URL = "http://192.249.18.117:80";
+    private String BASE_URL = "http://192.249.18.81:80";
     private String restId;
     private final int GET_GALLERY_IMAGE = 200;
     Uri selectedImageUri = null;

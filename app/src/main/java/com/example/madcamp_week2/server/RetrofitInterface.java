@@ -19,15 +19,11 @@ import retrofit2.http.Streaming;
 
 public interface RetrofitInterface {
 
-    @POST("/login")
+    @GET("/login")
     Call<LoginResult> executeLogin(@Body HashMap<String, String> map);
-/*
-    @POST("/test/signup")
-    Call<Void> executeSignup(@Body HashMap<String, String> map);
-*/
+
     @POST("/post/add")
     Call<Void> executePostAdd(@Body HashMap<String,String> map);
-
 
     @Multipart
     @POST("/post/addtest")
@@ -37,6 +33,8 @@ public interface RetrofitInterface {
     @POST("/post/get")
     Call<ResponseBody> executePostGet(@Body HashMap<String,String> map);
 
+    @POST("/user/getfavorites")
+    Call<List<RestResult>> executeGetMyFavorites(@Body HashMap<String, String> map);
 
     @POST("/user/add")
     Call<Void> executeSignup(@Body HashMap<String,String> map);
@@ -47,5 +45,7 @@ public interface RetrofitInterface {
 
     @GET("/rest/getall")
     Call<List<RestResult>> executeGetAllRest();
-//    Call<RestResult> executeGetAllRest();
+
+    @GET("/post/getall")
+    Call<List<PostResult>> executeGetAllPost();
 }

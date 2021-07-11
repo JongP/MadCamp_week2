@@ -8,6 +8,15 @@ public class LoginResult {
     @SerializedName("email")
     private String email;
 
+    private String[] favorites;
+
+    public String[] getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(String[] favorites) {
+        this.favorites = favorites;
+    }
 
     public String getName() {
         return name;

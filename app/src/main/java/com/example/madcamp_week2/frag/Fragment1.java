@@ -36,7 +36,7 @@ public class Fragment1 extends Fragment {
     private DictionaryAdapter mAdapter;
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-    private String BASE_URL = "http://192.249.18.117:80";
+    private String BASE_URL = "http://192.249.18.81:80";
     RecyclerView mRecyclerView;
     private static int flag = 0;
     int[] numEachCategory = new int[5];
@@ -66,7 +66,7 @@ public class Fragment1 extends Fragment {
                 .build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
 
-        handleTestServer();
+        handleServer();
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(), mLinearLayoutManager.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
@@ -74,7 +74,7 @@ public class Fragment1 extends Fragment {
         return view;
     }
 
-    private void handleTestServer() {
+    private void handleServer() {
 
         Call<List<RestResult>> call = retrofitInterface.executeGetAllRest();
 
@@ -82,10 +82,8 @@ public class Fragment1 extends Fragment {
             @Override
             public void onResponse(Call<List<RestResult>> call, Response<List<RestResult>> response) {
                 if(response.code()==200){
-                    Log.d("evening", "onClick: test response success");
-                    List<RestResult> list;
-                    list = response.body();
-                    Log.d("evening", list.get(0).getName());
+
+                    List<RestResult> list = response.body();
 
                     parsingRestResult(list);
 
