@@ -165,44 +165,12 @@ public class Fragment2 extends Fragment {
 
         for (PostResult post : postlist) {
 
-            request_one_rest_name(post.getRest());
-
-            while(restName == null);
-            Post post1 = new Post(post.getTitle(), post.getContent(), post.getRate(), post.getWriter(), post.getRest(), restName);
+            Post post1 = new Post(post.getTitle(), post.getContent(), post.getRate(), post.getWriter(), post.getRest(), post.getRestName());
 
             if (!list.contains(post1)) {
                 list.add(post1);
-                restName = null;
             }
         }
-    }
-
-    private void request_one_rest_name(String restId) {
-
-        HashMap<String , String> map = new HashMap<>();
-        map.put("id", restId);
-
-        Call<RestResult> call = retrofitInterface.executeGetOneRest(map);
-
-        call.enqueue(new Callback<RestResult>() {
-            @Override
-            public void onResponse(@NotNull Call<RestResult> call, @NotNull Response<RestResult> response) {
-                if (response.code() == 200) {
-
-                    RestResult restResult = response.body();
-                    restName = restResult.getName();
-
-                } else if (response.code() == 400) {
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RestResult> call, Throwable t) {
-
-            }
-        });
-
     }
 
 }

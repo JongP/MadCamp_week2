@@ -82,6 +82,7 @@
             android:layout_weight="1"
             android:text="좀 별로 (2점)" />
 
+
         <RadioButton
             android:id="@+id/rg_btn2"
             android:layout_width="0dp"

@@ -9,6 +9,25 @@ public class PostResult {
     private String writer;
     private String rest;
 
+    private String restName;
+    private String postImg;
+
+    public String getPostImg() {
+        return postImg;
+    }
+
+    public void setPostImg(String postImg) {
+        this.postImg = postImg;
+    }
+
+    public String getRestName() {
+        return restName;
+    }
+
+    public void setRestName(String restName) {
+        this.restName = restName;
+    }
+
     public String getTitle() {
         return title;
     }
