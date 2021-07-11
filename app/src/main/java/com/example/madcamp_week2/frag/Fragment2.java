@@ -60,7 +60,7 @@ public class Fragment2 extends Fragment {
     MainActivity activity;
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-    private String BASE_URL = "http://192.249.18.117:80";
+    private String BASE_URL = "http://192.249.18.81:80";
     private String TAG = "Frag2: ";
     String restName;
 
@@ -98,17 +98,17 @@ public class Fragment2 extends Fragment {
         ImageButton grid_button = v.findViewById(R.id.grid_button);
         ImageButton list_button = v.findViewById(R.id.list_button);
 
-        grid_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                adapter.setItemViewType(GalleryAdapter.GRID);
-                Drawable img_grid = getActivity().getResources().getDrawable(R.drawable.grid_on);
-                Drawable img_list = getActivity().getResources().getDrawable(R.drawable.list_off);
-                grid_button.setBackground(img_grid);
-                list_button.setBackground(img_list);
-                recyclerView.setLayoutManager(new GridLayoutManager(activity, 3));
-            }
-        });
+//        grid_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                adapter.setItemViewType(GalleryAdapter.GRID);
+//                Drawable img_grid = getActivity().getResources().getDrawable(R.drawable.grid_on);
+//                Drawable img_list = getActivity().getResources().getDrawable(R.drawable.list_off);
+//                grid_button.setBackground(img_grid);
+//                list_button.setBackground(img_list);
+//                recyclerView.setLayoutManager(new GridLayoutManager(activity, 3));
+//            }
+//        });
 
         list_button.setOnClickListener(new View.OnClickListener() {
             @Override
