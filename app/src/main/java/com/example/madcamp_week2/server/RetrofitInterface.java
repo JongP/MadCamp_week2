@@ -19,25 +19,10 @@ import retrofit2.http.Streaming;
 
 public interface RetrofitInterface {
 
-    @GET("/login")
-    Call<LoginResult> executeLogin(@Body HashMap<String, String> map);
-
     @POST("/post/add")
     Call<Void> executePostAdd(@Body HashMap<String,String> map);
 
-    @POST("/user/add")
-    Call<Void> executeSignup(@Body HashMap<String,String> map);
-
-    @POST("/rest/getone")
-    Call<RestResult> executeGetOneRest(@Body HashMap<String, String> map);
-
-    @POST("/user/getfavorites")
-    Call<List<RestResult>> executeGetMyFavorites(@Body HashMap<String, String> map);
-
-    @GET("/rest/getall")
-    Call<List<RestResult>> executeGetAllRest();
-
-    @GET("post/getall")
+    @GET("/post/getall")
     Call<List<PostResult>> executeGetAllPost();
 
     @Streaming
@@ -47,4 +32,23 @@ public interface RetrofitInterface {
     @Multipart
     @POST("/post/addtest")
     Call<Void> executePostAddTest(@Part MultipartBody.Part postImg, @PartMap HashMap<String, RequestBody> map);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @POST("/user/add")
+    Call<Void> executeSignup(@Body HashMap<String,String> map);
+
+
+    @POST("/user/getfavorites")
+    Call<List<RestResult>> executeGetMyFavorites(@Body HashMap<String, String> map);
+
+    @POST("/user/addfavorite")
+    Call<Void> executeAddFavorite(@Body HashMap<String ,String> map);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @POST("/rest/getone")
+    Call<RestResult> executeGetOneRest(@Body HashMap<String, String> map);
+
+    @GET("/rest/getall")
+    Call<List<RestResult>> executeGetAllRest();
+
 }

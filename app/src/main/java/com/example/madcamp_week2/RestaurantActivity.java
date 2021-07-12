@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.madcamp_week2.frag.Fragment3;
 import com.example.madcamp_week2.server.RestResult;
 import com.example.madcamp_week2.server.RetrofitInterface;
+import com.example.madcamp_week2.user.UserData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
@@ -117,7 +118,23 @@ public class RestaurantActivity extends AppCompatActivity {
                     favorite_button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            HashMap<String,String> map = new HashMap<>();
+                            UserData userData = new UserData();
+                            map.put("id", userData.getId());
+                            map.put("res", restResult.getId());
 
+                            Call<Void> call_fav = retrofitInterface.executeAddFavorite(map);
+                            call_fav.enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call_fav, Response<Void> response) {
+                                    Log.d("favoriteTest", "onResponse: ");
+                                }
+
+                                @Override
+                                public void onFailure(Call<Void> call_fav, Throwable t) {
+                                    Log.d("favoriteTest", "onFailure: ");
+                                }
+                            });
                         }
                     });
 
