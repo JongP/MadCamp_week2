@@ -37,7 +37,7 @@ public class Post {
         if (obj instanceof Post) {
             Post p = (Post) obj;
 
-            return p.writer.equals(this.writer) && p.rest.equals(this.rest);
+            return p.getId().equals(this.id);
         }
         return false;
     }

@@ -80,7 +80,7 @@ public class Fragment2 extends Fragment {
         list = new ArrayList<>();
 
         Log.d(TAG, "before handle server");
-        handleServer();
+       // handleServer();
         Log.d(TAG, "handle server done");
 
         Log.d(TAG, "onCreate done. gallery adapter created");
@@ -99,6 +99,12 @@ public class Fragment2 extends Fragment {
         Log.d(TAG, "set linear layout manager");
 
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        handleServer();
     }
 
     private void handleServer() {

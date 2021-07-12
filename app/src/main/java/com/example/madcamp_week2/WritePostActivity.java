@@ -49,8 +49,8 @@ public class WritePostActivity extends AppCompatActivity {
     EditText editContent;
     Button addImage_button;
     Button upload_button;
-    Button btn_get_img;
-    ImageView iv_getImg;
+//    Button btn_get_img;
+//    ImageView iv_getImg;
     ImageView iv_addImage;
     RadioButton[] rateButtons = new RadioButton[5];
 
@@ -72,8 +72,8 @@ public class WritePostActivity extends AppCompatActivity {
         addImage_button = findViewById(R.id.btn_add_img_id);
         upload_button = findViewById(R.id.upload_id);
         iv_addImage = findViewById(R.id.iv_add_img_id);
-        btn_get_img = findViewById(R.id.btn_get_img);
-        iv_getImg = findViewById(R.id.iv_get_img);
+//        btn_get_img = findViewById(R.id.btn_get_img);
+//        iv_getImg = findViewById(R.id.iv_get_img);
 
         rateButtons[0] = findViewById(R.id.rg_btn0);
         rateButtons[1] = findViewById(R.id.rg_btn1);
@@ -129,12 +129,12 @@ public class WritePostActivity extends AppCompatActivity {
             }
         });
 
-        btn_get_img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getServerImage();
-            }
-        });
+//        btn_get_img.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getServerImage();
+//            }
+//        });
     }
 
     @Override
@@ -214,7 +214,7 @@ public class WritePostActivity extends AppCompatActivity {
         }
         Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream);
         RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpg"), byteArrayOutputStream.toByteArray());
         MultipartBody.Part uploadFile = MultipartBody.Part.createFormData("postImg", file.getName() ,requestBody);
 
@@ -243,32 +243,32 @@ public class WritePostActivity extends AppCompatActivity {
         });
     }
 
-    private void getServerImage() {
-        HashMap<String ,String > map = new HashMap<>();
-        map.put("title","wowowowowowo");
-
-        Call<ResponseBody> call = retrofitInterface.executePostGet(map);
-
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.d(TAG, "onResponse: start");
-                Log.d(TAG, response.toString());
-
-                InputStream is = response.body().byteStream();
-                if(is==null)  Log.d(TAG, "onResponse: is is null");
-
-                Bitmap bitmap = BitmapFactory.decodeStream(is);
-                if(bitmap!=null) iv_getImg.setImageBitmap(bitmap);
-
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d(TAG, "onFauilure: start");
-                Toast.makeText(WritePostActivity.this, "getServerImage failed", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
+//    private void getServerImage() {
+//        HashMap<String ,String > map = new HashMap<>();
+//        map.put("title","wowowowowowo");
+//
+//        Call<ResponseBody> call = retrofitInterface.executePostGet(map);
+//
+//        call.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                Log.d(TAG, "onResponse: start");
+//                Log.d(TAG, response.toString());
+//
+//                InputStream is = response.body().byteStream();
+//                if(is==null)  Log.d(TAG, "onResponse: is is null");
+//
+//                Bitmap bitmap = BitmapFactory.decodeStream(is);
+//                if(bitmap!=null) iv_getImg.setImageBitmap(bitmap);
+//
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                Log.d(TAG, "onFauilure: start");
+//                Toast.makeText(WritePostActivity.this, "getServerImage failed", Toast.LENGTH_LONG).show();
+//            }
+//        });
+//    }
 }

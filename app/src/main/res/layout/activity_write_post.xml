@@ -6,52 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".WritePostActivity">
 
+    <!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="28dp"-->
+<!--        android:gravity="center"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/upload_id">-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/iv_get_img"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/ic_launcher_background" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_get_img"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="get Image" />-->
+
+<!--    </LinearLayout>-->
+
     <ImageView
         android:id="@+id/iv_add_img_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="48dp"
+        android:src="@drawable/splashlogo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        android:layout_marginTop="50dp"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_launcher_background"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/upload_id"
         android:layout_width="164dp"
         android:layout_height="37dp"
+        android:layout_marginTop="44dp"
         android:text="enter"
-        android:textColor="#FFBCBCBC"
+        android:textColor="@color/purple_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upload_id">
-
-        <ImageView
-            android:id="@+id/iv_get_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher_background" />
-
-        <Button
-            android:id="@+id/btn_get_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="get Image" />
-
-    </LinearLayout>
 
     <EditText
         android:id="@+id/edit_content_id"
@@ -70,12 +70,14 @@
         android:id="@+id/edit_title_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="post title"
         android:inputType="text"
         android:maxLength="1000"
         android:textColor="#FFBCBCBC"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_add_img_id" />
 
@@ -138,7 +140,7 @@
         android:layout_width="164dp"
         android:layout_height="37dp"
         android:text="add image"
-        android:textColor="#BCBCBC"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_add_img_id" />
