@@ -2,6 +2,7 @@ package com.example.madcamp_week2.model;
 
 public class Post {
 
+    private String id;
     private String title;
     private String content;
     private double rate;
@@ -12,14 +13,18 @@ public class Post {
     // PostResult 이외의 추가 필드
     private String restName;
 
-    public Post(String title, String content, double rate, String writer, String rest) {
+
+    public Post(String title, String content, double rate, String writer, String rest, String restName) {
         this.title = title;
         this.content = content;
         this.rate = rate;
         this.writer = writer;
         this.rest = rest;
+        this.restName = restName;
     }
-    public Post(String title, String content, double rate, String writer, String rest, String restName) {
+
+    public Post(String id, String title, String content, double rate, String writer, String rest, String restName) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.rate = rate;
@@ -84,4 +89,13 @@ public class Post {
     public void setRestName(String restName) {
         this.restName = restName;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }

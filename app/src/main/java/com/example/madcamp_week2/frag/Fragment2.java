@@ -60,7 +60,7 @@ public class Fragment2 extends Fragment {
     MainActivity activity;
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-    private String BASE_URL = "http://192.249.18.81:80";
+    private String BASE_URL = "http://192.249.18.117:80";
     private String TAG = "Frag2";
     RecyclerView recyclerView;
 
@@ -144,8 +144,8 @@ public class Fragment2 extends Fragment {
     private void parsingPostResult(List<PostResult> postlist) {
 
         for (PostResult post : postlist) {
-
-            Post post1 = new Post(post.getTitle(), post.getContent(), post.getRate(), post.getWriter(), post.getRest(), post.getRestName());
+            Log.d("post id check", post.getId());
+            Post post1 = new Post(post.getId(),post.getTitle(), post.getContent(), post.getRate(), post.getWriter(), post.getRest(), post.getRestName());
 
             if (!list.contains(post1)) {
                 list.add(post1);

@@ -41,7 +41,7 @@ public interface RetrofitInterface {
     Call<List<PostResult>> executeGetAllPost();
 
     @Streaming
-    @POST("/post/get")
+    @POST("/post/getphoto")
     Call<ResponseBody> executePostGet(@Body HashMap<String,String> map);
 
     @Multipart

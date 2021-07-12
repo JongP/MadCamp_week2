@@ -39,7 +39,7 @@ public class WritePostActivity extends AppCompatActivity {
 
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-    private String BASE_URL = "http://192.249.18.81:80";
+    private String BASE_URL = "http://192.249.18.117:80";
     private String restId;
     private final int GET_GALLERY_IMAGE = 200;
     Uri selectedImageUri = null;
@@ -81,6 +81,16 @@ public class WritePostActivity extends AppCompatActivity {
         rateButtons[3] = findViewById(R.id.rg_btn3);
         rateButtons[4] = findViewById(R.id.rg_btn4);
 
+
+        addImage_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+                startActivityForResult(intent, GET_GALLERY_IMAGE);
+            }
+        });
+
         Log.d("sat", "writePostActivity onCreate");
 
         upload_button.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +102,7 @@ public class WritePostActivity extends AppCompatActivity {
                 if (editTitle.getText().toString().length() == 0 || editContent.getText().toString().length() == 0)
                     return;
 
-                //if(selectedImageUri==null) return;
+                if(selectedImageUri==null) return;
 
                 Log.d("sat", "editText and uri succeed");
 
@@ -110,8 +120,8 @@ public class WritePostActivity extends AppCompatActivity {
                 if (!uploadable)
                     return;
 
-                sendPost(rate);
-                //sendPostTest(rate);
+                //sendPost(rate);
+                sendPostTest(rate);
 
                 Log.d("sat", "sendPost done");
 

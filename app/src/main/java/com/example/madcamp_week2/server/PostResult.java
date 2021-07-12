@@ -1,6 +1,11 @@
 package com.example.madcamp_week2.server;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PostResult {
+
+    @SerializedName("_id")
+    private String id;
 
     private String title;
     private String content;
@@ -66,5 +71,13 @@ public class PostResult {
 
     public void setRest(String rest) {
         this.rest = rest;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

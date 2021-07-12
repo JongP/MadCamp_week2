@@ -37,7 +37,7 @@ public class RestaurantActivity extends AppCompatActivity {
 
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-    private String BASE_URL = "http://192.249.18.81:80";
+    private String BASE_URL = "http://192.249.18.117:80";
     private String restId;
     private ImageView restImg;
 
