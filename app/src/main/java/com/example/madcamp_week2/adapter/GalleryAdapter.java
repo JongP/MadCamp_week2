@@ -42,38 +42,37 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 
     //private OnItemClickListener mListener;
-    private String[] sliderImage;
+    //private String[] sliderImage;
 
     int mItemViewType;
 
     public GalleryAdapter(Context context, ArrayList<Post> list, String[] sliderImage) {
         data = list;
         this.context = context;
-        this.sliderImage = sliderImage;
+        //this.sliderImage = sliderImage;
     }
 
     public static class ListViewHolder extends RecyclerView.ViewHolder {
         TextView restname;
         TextView title;
-        TextView content;
+        //TextView content;
         TextView rate;
-        ImageView img;
-        int type;
+        //ImageView img;
 
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
 
             title = itemView.findViewById(R.id.title_id);
-            content = itemView.findViewById(R.id.content_id);
+            //content = itemView.findViewById(R.id.content_id);
             rate = itemView.findViewById(R.id.rate);
             restname = itemView.findViewById(R.id.name);
-            img = itemView.findViewById(R.id.img);
+            //img = itemView.findViewById(R.id.img);
 
         }
 
-        public void bindSliderImage(String imageURL) {
-            Glide.with(context).load(imageURL).placeholder(R.drawable.loading).into(img);
-        }
+//        public void bindSliderImage(String imageURL) {
+//            Glide.with(context).load(imageURL).placeholder(R.drawable.loading).into(img);
+//        }
     }
 
     @NonNull
@@ -99,8 +98,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         //hld.bindSliderImage(sliderImage[position]);
         hld.title.setText(post.getTitle());
         hld.rate.setText(post.getRate() + "");
-        hld.content.setText(post.getContent());
-        getServerImage(post.getId(),hld.img);
+        //hld.content.setText(post.getContent());
+        //getServerImage(post.getId(),hld.img);
 
     }
 

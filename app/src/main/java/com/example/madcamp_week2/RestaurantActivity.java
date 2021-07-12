@@ -1,10 +1,12 @@
 package com.example.madcamp_week2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -55,6 +57,17 @@ public class RestaurantActivity extends AppCompatActivity {
                 .build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
 
+        SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                request_one_rest();
+                mSwipeRefreshLayout.setRefreshing(false);
+
+            }
+        });
+
         request_one_rest();
     }
 
@@ -82,8 +95,8 @@ public class RestaurantActivity extends AppCompatActivity {
 
                     restName.setText(restResult.getName());
                     contact.setText(restResult.getContact());
-                    category.setText(restResult.getCategory());
-                    rate.setText("" + restResult.getRate());
+                    category.setText("분류 : " + restResult.getCategory());
+                    rate.setText("별점 : " + restResult.getRate());
                     new LoadImage().execute(restResult.getPhotoURL());
 
                     restName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
@@ -105,6 +118,15 @@ public class RestaurantActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
 
+                        }
+                    });
+
+                    contact.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String tel_contact = restResult.getContact();
+                            tel_contact = tel_contact.replace("-", "");
+                            startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + tel_contact)));
                         }
                     });
 

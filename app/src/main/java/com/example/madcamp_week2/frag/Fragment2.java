@@ -154,7 +154,10 @@ public class Fragment2 extends Fragment {
             Post post1 = new Post(post.getId(),post.getTitle(), post.getContent(), post.getRate(), post.getWriter(), post.getRest(), post.getRestName());
 
             if (!list.contains(post1)) {
-                list.add(post1);
+                if (list.size() > 0)
+                    list.add(0, post1);
+                else
+                    list.add(post1);
             }
         }
     }
