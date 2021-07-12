@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +18,6 @@ import java.util.HashMap;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.madcamp_week2.R;
 import com.example.madcamp_week2.model.Post;
 import com.example.madcamp_week2.server.RetrofitInterface;
@@ -34,14 +34,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private ArrayList<Post> data;
     private static Context context;
     private String TAG = "GalleryAdapter: ";
-    private String BASE_URL = "http://192.249.18.81:80";
+    private String BASE_URL = "http://192.249.18.117:80";
     private Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
     private RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
 
 
-    //private OnItemClickListener mListener;
+    private OnItemClickListener mListener;
     //private String[] sliderImage;
 
     int mItemViewType;
@@ -58,8 +58,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         //TextView content;
         TextView rate;
         //ImageView img;
+        Button btn_detail_review;
 
-        public ListViewHolder(@NonNull View itemView) {
+        public ListViewHolder(@NonNull View itemView, GalleryAdapter.OnItemClickListener listener) {
             super(itemView);
 
             title = itemView.findViewById(R.id.title_id);
@@ -67,6 +68,19 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             rate = itemView.findViewById(R.id.rate);
             restname = itemView.findViewById(R.id.name);
             //img = itemView.findViewById(R.id.img);
+            btn_detail_review = itemView.findViewById(R.id.btn_detail_review);
+
+            btn_detail_review.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
 
         }
 
@@ -82,7 +96,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View view = inflater.inflate(R.layout.gallery_item_list, parent, false);
-        ListViewHolder vh = new ListViewHolder(view);
+        ListViewHolder vh = new ListViewHolder(view, mListener);
         return vh;
 
     }
@@ -100,6 +114,12 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         hld.rate.setText(post.getRate() + "");
         //hld.content.setText(post.getContent());
         //getServerImage(post.getId(),hld.img);
+        hld.btn_detail_review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 
@@ -140,5 +160,13 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 Log.d(TAG, "onFauilure: start");
             }
         });
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(GalleryAdapter.OnItemClickListener listener){
+        mListener = listener;
     }
 }

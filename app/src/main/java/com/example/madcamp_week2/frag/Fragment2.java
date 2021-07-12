@@ -1,50 +1,26 @@
 package com.example.madcamp_week2.frag;
 
-import android.content.Intent;
-import android.content.res.AssetManager;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.madcamp_week2.RestaurantActivity;
-import com.example.madcamp_week2.WritePostActivity;
-import com.example.madcamp_week2.adapter.DictionaryAdapter;
 import com.example.madcamp_week2.adapter.GalleryAdapter;
 import com.example.madcamp_week2.MainActivity;
 import com.example.madcamp_week2.R;
 import com.example.madcamp_week2.Restaurants;
 import com.example.madcamp_week2.model.Post;
 import com.example.madcamp_week2.server.PostResult;
-import com.example.madcamp_week2.server.RestResult;
 import com.example.madcamp_week2.server.RetrofitInterface;
-import com.example.madcamp_week2.user.UserData;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -55,12 +31,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class Fragment2 extends Fragment {
-    ArrayList<Post> list;
+    ArrayList<Post> postArrayList;
     GalleryAdapter adapter;
     MainActivity activity;
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-    private String BASE_URL = "http://192.249.18.81:80";
+    private String BASE_URL = "http://192.249.18.117:80";
     private String TAG = "Frag2";
     RecyclerView recyclerView;
 
@@ -77,13 +53,7 @@ public class Fragment2 extends Fragment {
                 .build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
 
-        list = new ArrayList<>();
-
-        Log.d(TAG, "before handle server");
-       // handleServer();
-        Log.d(TAG, "handle server done");
-
-        Log.d(TAG, "onCreate done. gallery adapter created");
+        postArrayList = new ArrayList<>();
     }
 
     @Override
@@ -125,7 +95,17 @@ public class Fragment2 extends Fragment {
                     parsingPostResult(postlist);
 
                     activity = (MainActivity) getActivity();
-                    adapter = new GalleryAdapter(activity, list, Restaurants.rest_images);
+                    adapter = new GalleryAdapter(activity, postArrayList, Restaurants.rest_images);
+
+                    adapter.setOnItemClickListener(new GalleryAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            String postId = postArrayList.get(position).getId();
+                            MainActivity activity = (MainActivity) getActivity();
+                            if (activity != null)
+                                activity.switchToPostPage(postId);
+                        }
+                    });
 
                     recyclerView.setAdapter(adapter);
                     Log.d(TAG, "adapter is attached to recyclerView");
@@ -153,11 +133,11 @@ public class Fragment2 extends Fragment {
             Log.d("post id check", post.getId());
             Post post1 = new Post(post.getId(),post.getTitle(), post.getContent(), post.getRate(), post.getWriter(), post.getRest(), post.getRestName());
 
-            if (!list.contains(post1)) {
-                if (list.size() > 0)
-                    list.add(0, post1);
+            if (!postArrayList.contains(post1)) {
+                if (postArrayList.size() > 0)
+                    postArrayList.add(0, post1);
                 else
-                    list.add(post1);
+                    postArrayList.add(post1);
             }
         }
     }
