@@ -126,22 +126,18 @@ public class LoginActivity extends AppCompatActivity {
             handleSignInResult(task);
 
             Toast.makeText(LoginActivity.this,"Login Success",Toast.LENGTH_SHORT).show();
-            try {
-                GoogleSignInAccount act=task.getResult(ApiException.class);
-                if(act!=null){
-                    retrofit=new Retrofit.Builder().baseUrl(BASE_URL)
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-                    retrofitInterface = retrofit.create(RetrofitInterface.class);
 
-                    server_add_user();
 
-                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                    startActivity(intent);
-                }
-            } catch (ApiException e) {
-                e.printStackTrace();
-            }
+            retrofit=new Retrofit.Builder().baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            retrofitInterface = retrofit.create(RetrofitInterface.class);
+
+            server_add_user();
+
+            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+            startActivity(intent);
+
 
 
         }
