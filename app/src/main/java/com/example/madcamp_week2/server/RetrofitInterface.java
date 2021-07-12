@@ -32,6 +32,8 @@ public interface RetrofitInterface {
     @Multipart
     @POST("/post/addtest")
     Call<Void> executePostAddTest(@Part MultipartBody.Part postImg, @PartMap HashMap<String, RequestBody> map);
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @POST("/user/add")
     Call<Void> executeSignup(@Body HashMap<String,String> map);
