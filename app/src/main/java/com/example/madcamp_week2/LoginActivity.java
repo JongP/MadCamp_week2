@@ -57,11 +57,14 @@ public class LoginActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(LoginActivity.this, gso);
         // 기존에 로그인 했던 계정을 확인한다.
         GoogleSignInAccount gsa = GoogleSignIn.getLastSignedInAccount(LoginActivity.this);
+        UserData userData = new UserData();
 
+        userData.setId("106592296388275140582");
 // 로그인 되있는 경우
         if (gsa != null) {
-            UserData userData = new UserData();
-            userData.setId(gsa.getId());
+            UserData userData1 = new UserData();
+            userData1.setId(gsa.getId());
+
 
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);

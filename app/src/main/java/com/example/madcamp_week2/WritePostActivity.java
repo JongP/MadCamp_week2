@@ -190,11 +190,12 @@ public class WritePostActivity extends AppCompatActivity {
         Log.d("sat", "start sendPostTest");
         HashMap<String,RequestBody> map =  new HashMap<>();
 
+
         RequestBody title = RequestBody.create(MediaType.parse("text/plain"),editTitle.getText().toString());
         RequestBody content = RequestBody.create(MediaType.parse("text/plain"),editContent.getText().toString());
         RequestBody rate = RequestBody.create(MediaType.parse("text/plain"),rateNum + "");
         RequestBody rest = RequestBody.create(MediaType.parse("text/plain"),restId);
-        RequestBody user = RequestBody.create(MediaType.parse("text/plain"),"106592296388275140582");
+        RequestBody user = RequestBody.create(MediaType.parse("text/plain"),UserData.getId());
 
         map.put("title",title);
         map.put("content",content);
