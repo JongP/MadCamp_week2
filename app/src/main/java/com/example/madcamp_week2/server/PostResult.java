@@ -1,6 +1,10 @@
 package com.example.madcamp_week2.server;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
+
+import org.jetbrains.annotations.NotNull;
 
 public class PostResult {
 
@@ -14,7 +18,9 @@ public class PostResult {
     private String writer;
     private String rest;
 
+    @SerializedName("restName")
     private String restName;
+
     private String postImg;
 
     public String getPostImg() {
@@ -80,4 +86,5 @@ public class PostResult {
     public void setId(String id) {
         this.id = id;
     }
+
 }

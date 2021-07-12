@@ -24,7 +24,7 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public static final int HEADER = 0;
     public static final int CHILD = 1;
     private ArrayList<Item> data;
-    private OnItemClickListener mListner;
+    private OnItemClickListener mListener;
 
     // constructor
     public DictionaryAdapter(ArrayList<Item> list){
@@ -84,7 +84,7 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 return header;
             case CHILD:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
-                DictionaryViewHolder child = new DictionaryViewHolder(view, mListner);
+                DictionaryViewHolder child = new DictionaryViewHolder(view, mListener);
                 return child;
         }
         return null;
@@ -175,6 +175,6 @@ public class DictionaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public void setOnItemClickListener(OnItemClickListener listener){
-        mListner = listener;
+        mListener = listener;
     }
 }

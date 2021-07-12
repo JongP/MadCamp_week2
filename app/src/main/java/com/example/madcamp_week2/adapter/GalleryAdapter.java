@@ -1,6 +1,7 @@
 package com.example.madcamp_week2.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -18,6 +19,7 @@ import java.util.HashMap;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.madcamp_week2.DetailPostActivity;
 import com.example.madcamp_week2.R;
 import com.example.madcamp_week2.model.Post;
 import com.example.madcamp_week2.server.RetrofitInterface;
@@ -33,7 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private ArrayList<Post> data;
     private static Context context;
-    private String TAG = "GalleryAdapter: ";
+    private static String TAG = "GalleryAdapter";
     private String BASE_URL = "http://192.249.18.117:80";
     private Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -70,17 +72,19 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             //img = itemView.findViewById(R.id.img);
             btn_detail_review = itemView.findViewById(R.id.btn_detail_review);
 
-            btn_detail_review.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null){
-                        int position = getAdapterPosition();
-                        if(position != RecyclerView.NO_POSITION){
-                            listener.onItemClick(position);
-                        }
-                    }
-                }
-            });
+//            btn_detail_review.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Log.d(TAG, "onclick");
+////                    if (listener != null){
+////                        int position = getAdapterPosition();
+////                        if(position != RecyclerView.NO_POSITION){
+////                            listener.onItemClick(position);
+////                        }
+////                    }
+//
+//                }
+//            });
 
         }
 
@@ -117,7 +121,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         hld.btn_detail_review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context, DetailPostActivity.class);
+                intent.putExtra("postId", post.getId());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
             }
         });
 
@@ -135,7 +142,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private void getServerImage(String postId, ImageView imageView) {
         HashMap<String ,String > map = new HashMap<>();
-        map.put("_id",postId);
+        map.put("id",postId);
 
         Call<ResponseBody> call = retrofitInterface.executePostGet(map);
 
@@ -166,7 +173,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         void onItemClick(int position);
     }
 
-    public void setOnItemClickListener(GalleryAdapter.OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener){
         mListener = listener;
     }
 }

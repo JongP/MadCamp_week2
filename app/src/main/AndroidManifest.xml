@@ -16,6 +16,8 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".WritePostActivity"
             android:theme="@style/NoBarTheme"></activity>
+        <activity android:name=".DetailPostActivity"
+            android:theme="@style/NoBarTheme"/>
         <activity android:name=".RestaurantActivity"
             android:theme="@style/NoBarTheme"/>
         <activity android:name=".LoginActivity"

@@ -10,21 +10,18 @@ public class Post {
     private String writer;
     private String rest;
 
-    // PostResult 이외의 추가 필드
+    private String postImg;
     private String restName;
 
-
-
-    public Post(String title, String content, double rate, String writer, String rest, String restName) {
-        this.title = title;
-        this.content = content;
-        this.rate = rate;
-        this.writer = writer;
-        this.rest = rest;
-        this.restName = restName;
+    public String getPostImg() {
+        return postImg;
     }
 
-    public Post(String id, String title, String content, double rate, String writer, String rest, String restName) {
+    public void setPostImg(String postImg) {
+        this.postImg = postImg;
+    }
+
+    public Post(String id, String title, String content, double rate, String writer, String rest, String restName, String postImg) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -32,6 +29,7 @@ public class Post {
         this.writer = writer;
         this.rest = rest;
         this.restName = restName;
+        this.postImg = postImg;
     }
 
     public boolean equals(Object obj) {

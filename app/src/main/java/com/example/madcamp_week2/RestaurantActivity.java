@@ -102,10 +102,6 @@ public class RestaurantActivity extends AppCompatActivity {
 
                     restName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
 
-                    Log.d("getOne", restResult.getName());
-                    Log.d("getOne", restResult.getContact());
-                    Log.d("getOne", restResult.getCategory());
-
                     write_button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

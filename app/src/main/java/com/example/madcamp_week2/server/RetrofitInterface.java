@@ -33,6 +33,8 @@ public interface RetrofitInterface {
     @POST("/post/addtest")
     Call<Void> executePostAddTest(@Part MultipartBody.Part postImg, @PartMap HashMap<String, RequestBody> map);
 
+    @POST("/post/getone")
+    Call<PostResult> executeGetOnePost(@Body HashMap<String, String> map);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @POST("/user/add")

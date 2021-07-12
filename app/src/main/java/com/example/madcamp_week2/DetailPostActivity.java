@@ -45,22 +45,29 @@ public class DetailPostActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurant);
+        setContentView(R.layout.activity_detail_post);
 
         Intent intent = getIntent();
-        postId = intent.getExtras().getString("restId");
+        postId = intent.getExtras().getString("postId");
 
         retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
 
+        Log.d("finish", "before request_one");
         request_one_post();
+
     }
 
     private void request_one_post() {
+
+        Log.d("finish", "start request one post");
+
         HashMap<String , String> map = new HashMap<>();
-        map.put("_id", postId);
+        map.put("id", postId);
+
+        Log.d("finish", postId);
 
         Call<PostResult> call = retrofitInterface.executeGetOnePost(map);
 
@@ -73,18 +80,17 @@ public class DetailPostActivity extends AppCompatActivity {
 
                     TextView restName = findViewById(R.id.post_restaurant_id);
                     TextView rate = findViewById(R.id.post_rate_id);
-                    postImg = findViewById(R.id.rest_image_id);
+                    postImg = findViewById(R.id.post_img_id);
                     ImageView gotoRest = findViewById(R.id.btn_goto_rest);
+                    TextView title = findViewById(R.id.post_title_id);
+                    TextView content = findViewById(R.id.post_content_id);
 
-                    restName.setText(postResult.getRestName());
                     rate.setText("별점 : " + (Math.round(postResult.getRate() * 10) / 10.0));
                     new LoadImage().execute(postResult.getPostImg());
-
+                    restName.setText(postResult.getRestName());
                     restName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
-
-                    Log.d("finish", postResult.getRestName());
-                    Log.d("finish", postResult.getTitle());
-                    Log.d("finish", postResult.getContent());
+                    title.setText(postResult.getTitle());
+                    content.setText(postResult.getContent());
 
                     gotoRest.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -96,12 +102,13 @@ public class DetailPostActivity extends AppCompatActivity {
                     });
 
                 } else if (response.code() == 400) {
-                    Toast.makeText(DetailPostActivity.this, "somehow onresponse failed", Toast.LENGTH_LONG);
+                    Toast.makeText(DetailPostActivity.this, "somehow onresponse failed", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<RestResult> call, Throwable t) {
+            public void onFailure(Call<PostResult> call, Throwable t) {
+                Toast.makeText(DetailPostActivity.this, "get one post failed", Toast.LENGTH_LONG).show();
             }
         });
 
