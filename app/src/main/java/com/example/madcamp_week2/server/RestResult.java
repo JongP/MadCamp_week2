@@ -13,6 +13,10 @@ public class RestResult {
     private String id;
     private String photoURL;
 
+    public RestResult(String name) {
+        this.name = name;
+    }
+
     public String getPhotoURL() {
         return photoURL;
     }

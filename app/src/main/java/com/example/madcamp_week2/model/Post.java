@@ -13,10 +13,6 @@ public class Post {
     // PostResult 이외의 추가 필드
     private String restName;
 
-    public Post(String id, String title) {
-        this.id = id;
-        this.title = title;
-    }
 
 
     public Post(String title, String content, double rate, String writer, String rest, String restName) {

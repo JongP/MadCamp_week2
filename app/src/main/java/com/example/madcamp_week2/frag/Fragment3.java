@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -19,11 +20,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.madcamp_week2.MainActivity;
 import com.example.madcamp_week2.R;
+import com.example.madcamp_week2.adapter.DictionaryAdapter;
+import com.example.madcamp_week2.adapter.FavoriteAdapter;
+import com.example.madcamp_week2.server.PostResult;
+import com.example.madcamp_week2.server.RestResult;
 import com.example.madcamp_week2.server.RetrofitInterface;
+import com.example.madcamp_week2.user.UserData;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -37,8 +45,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class Fragment3 extends Fragment {
@@ -48,11 +63,18 @@ public class Fragment3 extends Fragment {
     private TextView tv_userName, tv_userEmail;
     private GoogleSignInClient mGoogleSignInClient;
     private SignInButton btn_sign;
-    private String TAG = "good";
+    private String TAG = "Frag3: ";
     private RecyclerView rv_fav;
-    private Retrofit retrofit;
-    private RetrofitInterface retrofitInterface;
-    private String BASE_URL;
+
+    private String BASE_URL = "http://192.249.18.117:80";
+    private Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    private RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
+
+    private ArrayList<RestResult> list;
+    private FavoriteAdapter favoriteAdapter;
+    private LinearLayoutManager linearLayoutManager;
 
 
     public Fragment3() {
@@ -63,15 +85,10 @@ public class Fragment3 extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         Log.d("thisway", "onCreateView: there");
         super.onCreate(savedInstanceState);
-
-
         GoogleSignInAccount gsa = GoogleSignIn.getLastSignedInAccount(getContext());
         if(gsa!=null){
             Log.d("Frag3: getting Id",gsa.getId());
         }
-
-
-
     }
 
 
@@ -96,11 +113,56 @@ public class Fragment3 extends Fragment {
             new LoadImage().execute(gsa.getPhotoUrl().toString());
         }
 
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        rv_fav.setLayoutManager(linearLayoutManager);
 
+        list = new ArrayList<>();
+        favoriteAdapter = new FavoriteAdapter(list);
+        rv_fav.setAdapter(favoriteAdapter);
 
-
+        serverFavorite();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        serverFavorite();
+    }
+
+    private void serverFavorite() {
+        HashMap<String, String> map =new HashMap<>();
+        map.put("id", UserData.getId());
+
+        Call<List<RestResult>> call = retrofitInterface.executeGetMyFavorites(map);
+
+        call.enqueue(new Callback<List<RestResult>>() {
+            @Override
+            public void onResponse(Call<List<RestResult>> call, Response<List<RestResult>> response) {
+                if(response.code()==200){
+
+                    //List<RestResult> tmp_list = response.body();
+                    List<RestResult> toList = response.body();
+                    list.clear();
+                    for(RestResult item: toList){
+                        list.add(item);
+                    }
+                    favoriteAdapter.notifyDataSetChanged();
+
+
+                }else if(response.code()==400){
+                    Log.d("Frag3: ", "onClick: test response fail");
+                }
+                Log.d("Frag3: ", "response end");
+            }
+
+            @Override
+            public void onFailure(Call<List<RestResult>> call, Throwable t) {
+
+            }
+        });
+
     }
 
     private class LoadImage extends AsyncTask<String, Void, Bitmap> {

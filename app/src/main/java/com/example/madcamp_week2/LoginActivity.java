@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         if (gsa != null) {
             UserData userData1 = new UserData();
             userData1.setId(gsa.getId());
+            UserData.getId();
 
 
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
