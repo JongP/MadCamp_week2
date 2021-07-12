@@ -128,6 +128,9 @@ public class RestaurantActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Call<Void> call_fav, Response<Void> response) {
                                     Log.d("favoriteTest", "onResponse: ");
+                                    if(response.code()==200) Toast.makeText(RestaurantActivity.this, "favorite added", Toast.LENGTH_SHORT).show();
+                                    if(response.code()==201) Toast.makeText(RestaurantActivity.this, "favorite already added", Toast.LENGTH_SHORT).show();
+
                                 }
 
                                 @Override

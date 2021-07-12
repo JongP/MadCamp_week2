@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.util.Log;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.madcamp_week2.R;
+import com.example.madcamp_week2.server.RetrofitInterface;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -36,6 +38,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+import retrofit2.Retrofit;
+
 
 public class Fragment3 extends Fragment {
 
@@ -45,6 +49,10 @@ public class Fragment3 extends Fragment {
     private GoogleSignInClient mGoogleSignInClient;
     private SignInButton btn_sign;
     private String TAG = "good";
+    private RecyclerView rv_fav;
+    private Retrofit retrofit;
+    private RetrofitInterface retrofitInterface;
+    private String BASE_URL;
 
 
     public Fragment3() {
@@ -56,11 +64,6 @@ public class Fragment3 extends Fragment {
         Log.d("thisway", "onCreateView: there");
         super.onCreate(savedInstanceState);
 
-        //GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-       //         .requestEmail()// email addresses도 요청함
-         //       .build();
-
-        //mGoogleSignInClient = GoogleSignIn.getClient(getContext(), gso);
 
         GoogleSignInAccount gsa = GoogleSignIn.getLastSignedInAccount(getContext());
         if(gsa!=null){
@@ -83,22 +86,18 @@ public class Fragment3 extends Fragment {
         iv_user = view.findViewById(R.id.iv_user);
         tv_userEmail = view.findViewById(R.id.tv_userEmail);
         tv_userName = view.findViewById(R.id.tv_userName);
+        rv_fav = view.findViewById(R.id.rv_fav);
 
         GoogleSignInAccount gsa = GoogleSignIn.getLastSignedInAccount(getContext());
         if(gsa!=null){
             Log.d("Frag3: getting email",gsa.getPhotoUrl().toString());
-
             tv_userName.setText(gsa.getDisplayName());
             tv_userEmail.setText(gsa.getEmail());
-            //iv_user.setImageURI(gsa.getPhotoUrl());
-
             new LoadImage().execute(gsa.getPhotoUrl().toString());
-
-            //Bitmap bitmap = getImageBitmap(gsa.getPhotoUrl().toString());
-            //iv_user.setImageBitmap(bitmap);
-
-
         }
+
+
+
 
 
         return view;
