@@ -60,7 +60,7 @@ public class Fragment2 extends Fragment {
     MainActivity activity;
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-    private String BASE_URL = "http://192.249.18.117:80";
+    private String BASE_URL = "http://192.249.18.81:80";
     private String TAG = "Frag2";
     RecyclerView recyclerView;
 

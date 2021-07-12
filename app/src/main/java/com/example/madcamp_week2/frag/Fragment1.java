@@ -36,7 +36,7 @@ public class Fragment1 extends Fragment {
     private DictionaryAdapter mAdapter;
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-    private String BASE_URL = "http://192.249.18.117:80";
+    private String BASE_URL = "http://192.249.18.81:80";
     RecyclerView mRecyclerView;
     private static int flag = 0;
     int[] numEachCategory = new int[5];

@@ -6,30 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".WritePostActivity">
 
-    <!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="28dp"-->
-<!--        android:gravity="center"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/upload_id">-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/iv_get_img"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@drawable/ic_launcher_background" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/btn_get_img"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="get Image" />-->
-
-<!--    </LinearLayout>-->
-
     <ImageView
         android:id="@+id/iv_add_img_id"
         android:layout_width="150dp"
@@ -144,5 +120,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_add_img_id" />
+
+    <TextView
+        android:id="@+id/warning_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="#AAAA0000"
+        app:layout_constraintBottom_toTopOf="@+id/upload_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintVertical_bias="0.52" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
