@@ -34,7 +34,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private ArrayList<Post> data;
     private static Context context;
     private String TAG = "GalleryAdapter: ";
-    private String BASE_URL = "http://192.249.18.117:80";
+    private String BASE_URL = "http://192.249.18.81:80";
     private Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();

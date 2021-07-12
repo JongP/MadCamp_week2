@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.madcamp_week2.server.RetrofitInterface;
@@ -39,7 +40,7 @@ public class WritePostActivity extends AppCompatActivity {
 
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-    private String BASE_URL = "http://192.249.18.117:80";
+    private String BASE_URL = "http://192.249.18.81:80";
     private String restId;
     private final int GET_GALLERY_IMAGE = 200;
     Uri selectedImageUri = null;
@@ -53,6 +54,7 @@ public class WritePostActivity extends AppCompatActivity {
 //    ImageView iv_getImg;
     ImageView iv_addImage;
     RadioButton[] rateButtons = new RadioButton[5];
+    TextView warning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,10 +101,12 @@ public class WritePostActivity extends AppCompatActivity {
 
                 Log.d("sat", "post upload button onClick");
 
-                if (editTitle.getText().toString().length() == 0 || editContent.getText().toString().length() == 0)
+                if (editTitle.getText().toString().length() == 0 || editContent.getText().toString().length() == 0 || selectedImageUri == null)
+                {
+                    warning = findViewById(R.id.warning_id);
+                    warning.setText("! 제목과 본문, 이미지, 별점을 모두 작성해주세요 !");
                     return;
-
-                if(selectedImageUri==null) return;
+                }
 
                 Log.d("sat", "editText and uri succeed");
 
@@ -128,13 +132,6 @@ public class WritePostActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-//        btn_get_img.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                getServerImage();
-//            }
-//        });
     }
 
     @Override

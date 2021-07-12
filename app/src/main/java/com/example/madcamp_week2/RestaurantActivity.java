@@ -40,7 +40,7 @@ public class RestaurantActivity extends AppCompatActivity {
 
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-    private String BASE_URL = "http://192.249.18.117:80";
+    private String BASE_URL = "http://192.249.18.81:80";
     private String restId;
     private ImageView restImg;
 
@@ -97,7 +97,7 @@ public class RestaurantActivity extends AppCompatActivity {
                     restName.setText(restResult.getName());
                     contact.setText(restResult.getContact());
                     category.setText("분류 : " + restResult.getCategory());
-                    rate.setText("별점 : " + restResult.getRate());
+                    rate.setText("별점 : " + (Math.round(restResult.getRate() * 10) / 10.0));
                     new LoadImage().execute(restResult.getPhotoURL());
 
                     restName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
