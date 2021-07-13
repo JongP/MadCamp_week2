@@ -3,6 +3,7 @@ package com.example.madcamp_week2;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -23,6 +24,7 @@ import com.example.madcamp_week2.server.PostResult;
 import com.example.madcamp_week2.server.RestResult;
 import com.example.madcamp_week2.server.RetrofitInterface;
 import com.example.madcamp_week2.user.UserData;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -193,8 +195,18 @@ public class DetailPostActivity extends AppCompatActivity {
                     TextView tv_like = findViewById(R.id.tv_likeNum);
                     int num = Integer.parseInt(tv_like.getText().toString());
                     tv_like.setText(String.valueOf(num+1));
+                    FloatingActionButton floatingActionButton = findViewById(R.id.fb_like);
+                    floatingActionButton.setImageResource(R.drawable.ic_baseline_favorite_24);
+                    floatingActionButton.setBackgroundColor(Color.parseColor("#ff8c75"));
+
                 }else if (response.code() == 201) {
-                    Toast.makeText(DetailPostActivity.this, "already liked", Toast.LENGTH_LONG).show();
+                    Toast.makeText(DetailPostActivity.this, "unliked", Toast.LENGTH_LONG).show();
+                    TextView tv_like = findViewById(R.id.tv_likeNum);
+                    int num = Integer.parseInt(tv_like.getText().toString());
+                    tv_like.setText(String.valueOf(num-1));
+                    FloatingActionButton floatingActionButton = findViewById(R.id.fb_like);
+                    floatingActionButton.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                    floatingActionButton.setBackgroundColor(Color.parseColor("#9c9c9c"));
                 }
                 else if (response.code() == 400) {
                     Toast.makeText(DetailPostActivity.this, "add like 400 fail", Toast.LENGTH_LONG).show();

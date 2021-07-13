@@ -74,8 +74,10 @@
             android:layout_alignParentRight="true"
             android:layout_marginBottom="30dp"
             android:layout_marginRight="20dp"
-            android:src="@drawable/ic_baseline_favorite_24"
-            android:layout_alignBottom="@+id/post_rate_id">
+            android:src="@drawable/ic_baseline_favorite_border_24"
+            android:layout_alignBottom="@+id/post_rate_id"
+            android:backgroundTint="@color/pink">
+
 
         </com.google.android.material.floatingactionbutton.FloatingActionButton>
         <TextView
