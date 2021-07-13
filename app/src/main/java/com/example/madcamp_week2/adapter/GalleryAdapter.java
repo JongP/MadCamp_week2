@@ -34,8 +34,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private ArrayList<Post> data;
-    private static Context context;
-    private static String TAG = "GalleryAdapter";
+    private  Context context;
+    private  String TAG = "GalleryAdapter";
     private String BASE_URL = "http://192.249.18.117:80";
     private Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -66,30 +66,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             super(itemView);
 
             title = itemView.findViewById(R.id.title_id);
-            //content = itemView.findViewById(R.id.content_id);
             rate = itemView.findViewById(R.id.rate);
             restname = itemView.findViewById(R.id.name);
-            //img = itemView.findViewById(R.id.img);
             btn_detail_review = itemView.findViewById(R.id.btn_detail_review);
 
-//            btn_detail_review.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Log.d(TAG, "onclick");
-////                    if (listener != null){
-////                        int position = getAdapterPosition();
-////                        if(position != RecyclerView.NO_POSITION){
-////                            listener.onItemClick(position);
-////                        }
-////                    }
-//
-//                }
-//            });
+
 
         }
 
-//        public void bindSliderImage(String imageURL) {
-//            Glide.with(context).load(imageURL).placeholder(R.drawable.loading).into(img);
 //        }
     }
 
