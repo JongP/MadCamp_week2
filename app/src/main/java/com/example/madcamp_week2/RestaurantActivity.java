@@ -93,6 +93,7 @@ public class RestaurantActivity extends AppCompatActivity {
                     restImg = findViewById(R.id.rest_image_id);
                     Button write_button = findViewById(R.id.btn_write_review_id);
                     Button favorite_button = findViewById(R.id.btn_favorite_id);
+                    Button see_revie_button = findViewById(R.id.btn_see_review_id);
 
                     restName.setText(restResult.getName());
                     contact.setText(restResult.getContact());
@@ -143,6 +144,15 @@ public class RestaurantActivity extends AppCompatActivity {
                             String tel_contact = restResult.getContact();
                             tel_contact = tel_contact.replace("-", "");
                             startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + tel_contact)));
+                        }
+                    });
+
+                    see_revie_button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(RestaurantActivity.this, SeeReviewsActivity.class);
+                            intent.putExtra("restId",restResult.getId());
+                            startActivity(intent);
                         }
                     });
 
