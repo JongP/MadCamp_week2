@@ -58,11 +58,18 @@ public class DetailPostActivity extends AppCompatActivity {
         Intent intent = getIntent();
         postId = intent.getExtras().getString("postId");
 
+        findViewById(R.id.fb_like).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                serverAddLike();
+            }
+        });
 
         Log.d("finish", "before request_one");
         request_one_post();
         getServerImage();
     }
+
 
     private void request_one_post() {
 
@@ -91,6 +98,7 @@ public class DetailPostActivity extends AppCompatActivity {
                     ImageView gotoRest = findViewById(R.id.btn_goto_rest);
                     TextView title = findViewById(R.id.post_title_id);
                     TextView content = findViewById(R.id.post_content_id);
+                    TextView tv_likenumber = findViewById(R.id.tv_likeNum);
 
                     rate.setText("별점 : " + (Math.round(postResult.getRate() * 10) / 10.0));
                     //new LoadImage().execute(postResult.getPostImg());
@@ -98,6 +106,7 @@ public class DetailPostActivity extends AppCompatActivity {
                     restName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
                     title.setText(postResult.getTitle());
                     content.setText(postResult.getContent());
+                    tv_likenumber.setText(String.valueOf(postResult.getLikeNum()));
 
                     gotoRest.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -167,5 +176,36 @@ public class DetailPostActivity extends AppCompatActivity {
                 Log.d(TAG, "onFauilure: start");
             }
         });
+    }
+
+    private void serverAddLike() {
+        HashMap<String , String> map = new HashMap<>();
+        map.put("post", postId);
+        map.put("user",UserData.getId());
+
+        Call<Void> call = retrofitInterface.executeAddLike(map);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NotNull Call<Void> call, @NotNull Response<Void> response) {
+                if (response.code() == 200) {
+                    Toast.makeText(DetailPostActivity.this, "liked", Toast.LENGTH_SHORT).show();
+                    TextView tv_like = findViewById(R.id.tv_likeNum);
+                    int num = Integer.parseInt(tv_like.getText().toString());
+                    tv_like.setText(String.valueOf(num+1));
+                }else if (response.code() == 201) {
+                    Toast.makeText(DetailPostActivity.this, "already liked", Toast.LENGTH_LONG).show();
+                }
+                else if (response.code() == 400) {
+                    Toast.makeText(DetailPostActivity.this, "add like 400 fail", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(DetailPostActivity.this, "add failure", Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 }

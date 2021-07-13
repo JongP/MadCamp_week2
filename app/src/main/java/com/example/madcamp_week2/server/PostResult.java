@@ -14,6 +14,7 @@ public class PostResult {
     private String title;
     private String content;
     private double rate;
+    private int likeNum;
 
     private String writer;
     private String writerName;
@@ -97,4 +98,11 @@ public class PostResult {
         this.id = id;
     }
 
+    public int getLikeNum() {
+        return likeNum;
+    }
+
+    public void setLikeNum(int likeNum) {
+        this.likeNum = likeNum;
+    }
 }

@@ -39,6 +39,9 @@ public interface RetrofitInterface {
     @POST("/post/getone")
     Call<PostResult> executeGetOnePost(@Body HashMap<String, String> map);
 
+    @POST("/post/addlike")
+    Call<Void> executeAddLike(@Body HashMap<String, String> map);
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @POST("/user/add")
     Call<Void> executeSignup(@Body HashMap<String,String> map);

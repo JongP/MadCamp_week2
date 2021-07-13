@@ -6,6 +6,7 @@ public class Post {
     private String title;
     private String content;
     private double rate;
+    private int likeNum;
 
     private String writer;
     private String writerName;
@@ -105,5 +106,13 @@ public class Post {
 
     public void setWriterName(String writerName) {
         this.writerName = writerName;
+    }
+
+    public int getLikeNum() {
+        return likeNum;
+    }
+
+    public void setLikeNum(int likeNum) {
+        this.likeNum = likeNum;
     }
 }
