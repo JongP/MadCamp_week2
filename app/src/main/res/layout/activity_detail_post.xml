@@ -17,6 +17,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="18dp"
+            android:fontFamily="@font/bm_jua"
             android:layout_weight="1"
             android:text="Restaurant Name"
             android:textSize="30sp" />
@@ -41,6 +42,7 @@
         android:id="@+id/post_title_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/bm_jua"
         android:text="title"
         android:textSize="25sp"
         android:layout_marginHorizontal="18dp"
@@ -50,6 +52,7 @@
         android:id="@+id/post_content_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/bm_jua"
         android:text="contents"
         android:layout_margin="18dp"
         android:textSize="18sp"/>
@@ -58,6 +61,7 @@
         android:id="@+id/post_rate_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/bm_jua"
         android:text="rate"
         android:layout_marginHorizontal="18dp"
         android:textSize="18sp"/>

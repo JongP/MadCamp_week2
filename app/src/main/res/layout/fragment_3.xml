@@ -39,12 +39,14 @@
                     android:id="@+id/tv_userName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/bm_jua"
                     android:text="user Name"
                     android:textSize="17sp" />
 
                 <TextView
                     android:id="@+id/tv_userEmail"
                     android:layout_width="match_parent"
+                    android:fontFamily="@font/bm_jua"
                     android:layout_height="42dp"
                     android:text="user email"
                     android:textSize="17sp" />
@@ -68,6 +70,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/bm_jua"
             android:text="My favorites"
             android:textStyle="bold"
             android:textSize="30sp" />
