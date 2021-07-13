@@ -140,34 +140,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return mItemViewType;
     }
 
-    private void getServerImage(String postId, ImageView imageView) {
-        HashMap<String ,String > map = new HashMap<>();
-        map.put("id",postId);
 
-        Call<ResponseBody> call = retrofitInterface.executePostGet(map);
-
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.d(TAG, "onResponse: start");
-                Log.d(TAG, response.toString());
-                InputStream is=null;
-                Bitmap bitmap = null;
-                if(response.body()!=null) is = response.body().byteStream();
-                if(is==null)  Log.d(TAG, "onResponse: is is null");
-                else bitmap = BitmapFactory.decodeStream(is);
-
-                if(bitmap!=null) imageView.setImageBitmap(bitmap);
-
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d(TAG, "onFauilure: start");
-            }
-        });
-    }
 
     public interface OnItemClickListener {
         void onItemClick(int position);

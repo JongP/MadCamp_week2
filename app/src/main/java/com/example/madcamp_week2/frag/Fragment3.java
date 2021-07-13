@@ -120,6 +120,7 @@ public class Fragment3 extends Fragment {
         favoriteAdapter = new FavoriteAdapter(list);
         rv_fav.setAdapter(favoriteAdapter);
 
+
         serverFavorite();
 
         return view;

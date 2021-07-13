@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.madcamp_week2.R;
 import com.example.madcamp_week2.server.RestResult;
 import com.example.madcamp_week2.server.RetrofitInterface;
 import com.example.madcamp_week2.user.UserData;
@@ -82,7 +83,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void server_add_user() {
         HashMap<String , String> map = new HashMap<>();
-        if(acct==null) return;;
+        if(acct==null) {
+            Log.d(TAG, "server_add_user: acct is null");
+            return;}
         map.put("id", acct.getId());
         map.put("name", acct.getDisplayName());
 
@@ -98,6 +101,8 @@ public class LoginActivity extends AppCompatActivity {
                 } else if (response.code() == 400) {
                     Toast.makeText(LoginActivity.this,
                             "Already registered", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "already registered with res 400");
+
                 }
             }
 
@@ -130,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
             handleSignInResult(task);
 
             Toast.makeText(LoginActivity.this,"Login Success",Toast.LENGTH_SHORT).show();
-
+            Log.d(TAG,task.toString());
 
             retrofit=new Retrofit.Builder().baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
