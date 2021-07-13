@@ -50,8 +50,6 @@ public class WritePostActivity extends AppCompatActivity {
     EditText editContent;
     Button addImage_button;
     Button upload_button;
-//    Button btn_get_img;
-//    ImageView iv_getImg;
     ImageView iv_addImage;
     RadioButton[] rateButtons = new RadioButton[5];
     TextView warning;
@@ -74,8 +72,6 @@ public class WritePostActivity extends AppCompatActivity {
         addImage_button = findViewById(R.id.btn_add_img_id);
         upload_button = findViewById(R.id.upload_id);
         iv_addImage = findViewById(R.id.iv_add_img_id);
-//        btn_get_img = findViewById(R.id.btn_get_img);
-//        iv_getImg = findViewById(R.id.iv_get_img);
 
         rateButtons[0] = findViewById(R.id.rg_btn0);
         rateButtons[1] = findViewById(R.id.rg_btn1);

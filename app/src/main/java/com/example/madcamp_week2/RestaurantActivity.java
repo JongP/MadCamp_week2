@@ -1,17 +1,21 @@
 package com.example.madcamp_week2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Outline;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewOutlineProvider;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -99,8 +103,18 @@ public class RestaurantActivity extends AppCompatActivity {
                     category.setText("분류 : " + restResult.getCategory());
                     rate.setText("별점 : " + (Math.round(restResult.getRate() * 10) / 10.0));
                     new LoadImage().execute(restResult.getPhotoURL());
-
                     restName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+
+//                    GradientDrawable drawable=
+//                            (GradientDrawable) (RestaurantActivity.this).getDrawable(R.drawable.background_rounding);
+//                    restImg.setBackground(drawable);
+                    restImg.setClipToOutline(true);
+                    restImg.setOutlineProvider(new ViewOutlineProvider() {
+                        @Override
+                        public void getOutline(View view, Outline outline) {
+                            outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), 40);
+                        }
+                    });
 
                     write_button.setOnClickListener(new View.OnClickListener() {
                         @Override

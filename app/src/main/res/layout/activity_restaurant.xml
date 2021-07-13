@@ -11,6 +11,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="18dp"
     tools:context=".RestaurantActivity">
 
     <Button
@@ -30,6 +31,7 @@
         android:id="@+id/rest_image_id"
         android:layout_width="409dp"
         android:layout_height="331dp"
+        android:background="@drawable/background_rounding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
