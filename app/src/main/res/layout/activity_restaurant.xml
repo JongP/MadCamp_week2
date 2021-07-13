@@ -24,7 +24,7 @@
             android:foregroundGravity="center"
             app:cardCornerRadius="12dp"
             app:cardElevation="3dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +51,7 @@
             android:orientation="vertical"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:padding="15dp"
+            android:padding="10dp"
             android:background="@drawable/button_round_yellow"
             >
 
@@ -62,7 +62,7 @@
                 android:fontFamily="@font/bm_jua"
                 android:layout_weight="1"
                 android:background="@drawable/button_round_white"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:text="restaurantName"
                 android:textColor="@color/black"
                 android:gravity="center"
