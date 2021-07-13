@@ -151,7 +151,6 @@ public class Fragment3 extends Fragment {
                     }
                     favoriteAdapter.notifyDataSetChanged();
 
-
                 }else if(response.code()==400){
                     Log.d("Frag3: ", "onClick: test response fail");
                 }
