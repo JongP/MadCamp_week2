@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         GoogleSignInAccount gsa = GoogleSignIn.getLastSignedInAccount(LoginActivity.this);
         UserData userData = new UserData();
 
-        userData.setId("106592296388275140582");
+        userData.setId("116744773438385920261");
 // 로그인 되있는 경우
         if (gsa != null) {
             UserData userData1 = new UserData();

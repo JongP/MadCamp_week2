@@ -13,6 +13,7 @@
         android:id="@+id/category_id"
         android:textColor="@color/purple_700"
         android:textSize="18sp"
+        android:fontFamily="@font/bm_jua"
         android:gravity="center_vertical"
         android:layout_width="0dp"
         android:layout_height="match_parent"

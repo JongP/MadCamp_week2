@@ -68,12 +68,18 @@ public class Fragment1 extends Fragment {
                 .build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
 
-        handleServer();
+        //handleServer();
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(), mLinearLayoutManager.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        handleServer();
     }
 
     private void handleServer() {
@@ -145,6 +151,7 @@ public class Fragment1 extends Fragment {
             String name = restaurant.getName();
             String id = restaurant.getId();
             String contact = restaurant.getContact();
+            double rate = restaurant.getRate();
 
             switch (restaurant.getCategory()) {
                 case "한식":
@@ -166,6 +173,7 @@ public class Fragment1 extends Fragment {
                         mArrayList.add(index, new Item("한식", id, dict));
                     else
                         mArrayList.add(new Item("한식", id, dict));
+                    mArrayList.get(index).setRate(Math.round(rate * 10) / 10.0);
 
                     //Log.d("evening", "한식 Item : " + mArrayList.get(index).dict.getName());
 
@@ -188,6 +196,7 @@ public class Fragment1 extends Fragment {
                         mArrayList.add(index, new Item("일식", id, dict));
                     else
                         mArrayList.add(new Item("일식", id, dict));
+                    mArrayList.get(index).setRate(Math.round(rate * 10) / 10.0);
                     break;
 
                 case "양식":
@@ -210,6 +219,7 @@ public class Fragment1 extends Fragment {
                         mArrayList.add(index, new Item("양식", id, dict));
                     else
                         mArrayList.add(new Item("양식", id, dict));
+                    mArrayList.get(index).setRate(Math.round(rate * 10) / 10.0);
                     break;
 
                 case "Pub & Bar":
@@ -236,6 +246,7 @@ public class Fragment1 extends Fragment {
                         mArrayList.add(index, new Item("Pub & Bar", id, dict));
                     else
                         mArrayList.add(new Item("Pub & Bar", id, dict));
+                    mArrayList.get(index).setRate(Math.round(rate * 10) / 10.0);
                     break;
 
                 default:
@@ -259,6 +270,7 @@ public class Fragment1 extends Fragment {
                         mArrayList.add(index, new Item("기타 외국 음식", id, dict));
                     else
                         mArrayList.add(new Item("기타 외국 음식", id, dict));
+                    mArrayList.get(index).setRate(Math.round(rate * 10) / 10.0);
                     break;
             }
         }
