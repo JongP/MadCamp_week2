@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,15 +45,17 @@ public class WritePostActivity extends AppCompatActivity {
     private String restId;
     private final int GET_GALLERY_IMAGE = 200;
     Uri selectedImageUri = null;
-    private String TAG = "plz";
+    float rate;
 
     EditText editTitle;
     EditText editContent;
     Button addImage_button;
     Button upload_button;
     ImageView iv_addImage;
-    RadioButton[] rateButtons = new RadioButton[5];
+//    RadioButton[] rateButtons = new RadioButton[5];
     TextView warning;
+    RatingBar ratingBar;
+    TextView score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,13 +75,22 @@ public class WritePostActivity extends AppCompatActivity {
         addImage_button = findViewById(R.id.btn_add_img_id);
         upload_button = findViewById(R.id.upload_id);
         iv_addImage = findViewById(R.id.iv_add_img_id);
+        score = findViewById(R.id.write_rate);
+        ratingBar = findViewById(R.id.write_ratingBar);
 
-        rateButtons[0] = findViewById(R.id.rg_btn0);
-        rateButtons[1] = findViewById(R.id.rg_btn1);
-        rateButtons[2] = findViewById(R.id.rg_btn2);
-        rateButtons[3] = findViewById(R.id.rg_btn3);
-        rateButtons[4] = findViewById(R.id.rg_btn4);
+//        rateButtons[0] = findViewById(R.id.rg_btn0);
+//        rateButtons[1] = findViewById(R.id.rg_btn1);
+//        rateButtons[2] = findViewById(R.id.rg_btn2);
+//        rateButtons[3] = findViewById(R.id.rg_btn3);
+//        rateButtons[4] = findViewById(R.id.rg_btn4);
 
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                score.setText(rating + "점");
+                rate = rating;
+            }
+        });
 
         addImage_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,30 +109,13 @@ public class WritePostActivity extends AppCompatActivity {
 
                 Log.d("sat", "post upload button onClick");
 
-                if (editTitle.getText().toString().length() == 0 || editContent.getText().toString().length() == 0 || selectedImageUri == null)
+                if (editTitle.getText().toString().length() == 0 || editContent.getText().toString().length() == 0 || selectedImageUri == null || rate == 0.0)
                 {
                     warning = findViewById(R.id.warning_id);
                     warning.setText("! 제목과 본문, 이미지, 별점을 모두 작성해주세요 !");
                     return;
                 }
 
-                Log.d("sat", "editText and uri succeed");
-
-                boolean uploadable = false;
-                int rate = 0;
-                for (int i = 0; i < rateButtons.length; i++) {
-                    if (rateButtons[i].isChecked()) {
-                        uploadable = true;
-                        rate = i + 1;
-                    }
-                }
-
-                Log.d("sat", "check rate succeed");
-
-                if (!uploadable)
-                    return;
-
-                //sendPost(rate);
                 sendPostTest(rate);
 
                 Log.d("sat", "sendPost done");
@@ -143,42 +138,7 @@ public class WritePostActivity extends AppCompatActivity {
         }
     }
 
-    private void sendPost(int rate) {
-
-        Log.d("sat", "start sendPost");
-
-        HashMap<String,String> map =  new HashMap<>();
-        map.put("title",editTitle.getText().toString());
-        map.put("content",editContent.getText().toString());
-        map.put("rate", rate + "");
-        map.put("rest",restId);
-        map.put("user","106592296388275140582");
-
-        Log.d("sat", "106592296388275140582");
-
-        Call<Void> call = retrofitInterface.executePostAdd(map);
-
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if(response.code()==200)
-                {
-                    Toast.makeText(WritePostActivity.this, "Post upload succeed", Toast.LENGTH_LONG).show();
-                    Log.d("sat", "post upload");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(WritePostActivity.this, "Post upload failed", Toast.LENGTH_LONG).show();
-
-            }
-        });
-
-
-    }
-
-    private void sendPostTest(int rateNum) {
+    private void sendPostTest(float rateNum) {
 
         Log.d("sat", "start sendPostTest");
         HashMap<String,RequestBody> map =  new HashMap<>();
