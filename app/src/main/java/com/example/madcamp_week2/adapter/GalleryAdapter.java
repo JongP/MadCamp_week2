@@ -61,6 +61,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         TextView rate;
         //ImageView img;
         Button btn_detail_review;
+        TextView writer;
 
         public ListViewHolder(@NonNull View itemView, GalleryAdapter.OnItemClickListener listener) {
             super(itemView);
@@ -69,7 +70,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             rate = itemView.findViewById(R.id.rate);
             restname = itemView.findViewById(R.id.name);
             btn_detail_review = itemView.findViewById(R.id.btn_detail_review);
-
+            writer = itemView.findViewById(R.id.tv_writer);
 
 
         }
@@ -100,8 +101,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         //hld.bindSliderImage(sliderImage[position]);
         hld.title.setText(post.getTitle());
         hld.rate.setText(post.getRate() + "");
-        //hld.content.setText(post.getContent());
-        //getServerImage(post.getId(),hld.img);
+        hld.writer.setText("By "+post.getWriterName());
+
         hld.btn_detail_review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

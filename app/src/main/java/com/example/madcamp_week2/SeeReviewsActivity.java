@@ -78,7 +78,7 @@ public class SeeReviewsActivity extends AppCompatActivity {
                     List<PostResult> postlist = response.body();
 
                     for(PostResult item : postlist){
-                        arrayList.add(new Post(item.getId(), item.getTitle(), item.getContent(), item.getRate(), item.getWriter(), item.getRest(), item.getRestName(), item.getPostImg()));
+                        arrayList.add(new Post(item.getId(), item.getTitle(), item.getContent(), item.getRate(), item.getWriter(),item.getWriterName(), item.getRest(), item.getRestName(), item.getPostImg()));
                     }
 
                     galleryAdapter.notifyDataSetChanged();

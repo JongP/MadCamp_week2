@@ -16,6 +16,16 @@ public class PostResult {
     private double rate;
 
     private String writer;
+    private String writerName;
+
+    public String getWriterName() {
+        return writerName;
+    }
+
+    public void setWriterName(String writerName) {
+        this.writerName = writerName;
+    }
+
     private String rest;
 
     @SerializedName("restName")

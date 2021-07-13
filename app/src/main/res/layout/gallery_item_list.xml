@@ -37,16 +37,16 @@
                 android:textSize="16sp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="8dp"/>
-
-            <TextView
-                android:id="@+id/name"
-                android:text="식당이름"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="8dp"/>
+                <TextView
+                    android:id="@+id/name"
+                    android:text="식당이름"
+                    android:padding="10dp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    />
 
             <TextView
                 android:id="@+id/title_id"
@@ -57,6 +57,16 @@
                 android:text="제목"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_writer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:textStyle="italic"
+                android:text="by Name"
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/btn_detail_review"

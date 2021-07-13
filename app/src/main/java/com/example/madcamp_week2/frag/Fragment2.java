@@ -133,7 +133,7 @@ public class Fragment2 extends Fragment {
         for (PostResult post : postlist) {
             Log.d("post id check", post.getId());
             Post post1 = new Post(post.getId(),post.getTitle(), post.getContent(),
-                    post.getRate(), post.getWriter(), post.getRest(), post.getRestName(), post.getPostImg());
+                    post.getRate(), post.getWriter(),post.getWriterName(), post.getRest(), post.getRestName(), post.getPostImg());
 
             if (!postArrayList.contains(post1)) {
                 if (postArrayList.size() > 0)

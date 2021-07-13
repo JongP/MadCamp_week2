@@ -8,6 +8,7 @@ public class Post {
     private double rate;
 
     private String writer;
+    private String writerName;
     private String rest;
 
     private String postImg;
@@ -21,12 +22,13 @@ public class Post {
         this.postImg = postImg;
     }
 
-    public Post(String id, String title, String content, double rate, String writer, String rest, String restName, String postImg) {
+    public Post(String id, String title, String content, double rate, String writer, String writerName, String rest, String restName, String postImg) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.rate = rate;
         this.writer = writer;
+        this.writerName =writerName;
         this.rest = rest;
         this.restName = restName;
         this.postImg = postImg;
@@ -97,4 +99,11 @@ public class Post {
         this.id = id;
     }
 
+    public String getWriterName() {
+        return writerName;
+    }
+
+    public void setWriterName(String writerName) {
+        this.writerName = writerName;
+    }
 }
